@@ -1,5 +1,6 @@
 package com.example.stockspokedex.di
 
+import com.example.stockspokedex.ui.viewstates.LoginViewState
 import com.example.stockspokedex.ui.viewstates.MainViewState
 import dagger.Module
 import dagger.Provides
@@ -15,4 +16,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideMainViewState() = MainViewState()
+
+    @Singleton
+    @Provides
+    fun provideLoginViewState() = LoginViewState()
 }

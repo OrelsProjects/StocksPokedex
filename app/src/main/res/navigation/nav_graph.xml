@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.stockspokedex.ui.fragments.main.LoginFragment"
+        android:label="LoginFragment" />
+
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.stockspokedex.ui.fragments.main.MainFragment"
-        android:label="MainFragment"/>
+        android:label="MainFragment" />
+
+    <action
+        android:id="@+id/loginActionToMainFragment"
+        app:destination="@id/mainFragment" />
 
 </navigation>

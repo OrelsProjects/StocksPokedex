@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="transparent" format="color" />
+    <attr name="colorBackground" format="color"/>
+    <attr name="colorAccentDarker" format="color" />
+    <attr name="colorAccentFaded" format="color" />
+    <attr name="colorSeparatingLine" format="color" />
+    <attr name="colorGreenVariant" format="color" />
+    <attr name="colorRedVariant" format="color" />
+    <attr name="colorStatistics" format="color" />
+    <attr name="colorStatisticsDark" format="color" />
+    <attr name="colorStatisticsFaded" format="color" />
+    <attr name="colorAccentVariant" format="color" />
+    <attr name="colorProgressSeekbar" format="color" />
+    <attr name="colorTextPrimary" format="color" />
+    <attr name="colorTextSecondary" format="color"/>
+</resources>
