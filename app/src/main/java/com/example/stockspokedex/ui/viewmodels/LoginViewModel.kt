@@ -6,11 +6,15 @@ import com.example.stockspokedex.ui.viewstates.LoginViewState
 import javax.inject.Inject
 
 class LoginViewModel @ViewModelInject constructor(
+    private val loginViewState: LoginViewState
 ) : BaseViewModel<LoginViewState>() {
 
 
-    @Inject
-    lateinit var loginViewState: LoginViewState
-
     override fun getViewState(): LoginViewState = loginViewState
+
+    fun handleLogin() {
+        // Todo implement login
+        loginViewState.isLoginSuccessful = true
+        updateUI()
+    }
 }

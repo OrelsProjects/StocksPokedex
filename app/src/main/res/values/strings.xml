@@ -9,4 +9,9 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="google_heb">גוגל</string>
+    <string name="google_login">google login</string>
+    <string name="login">Login</string>
+    <string name="home_page_heb">ראשי</string>
+    <string name="add_stock_heb">הוסף מניה</string>
 </resources>

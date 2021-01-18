@@ -1,4 +1,4 @@
-package com.example.stockspokedex.ui.fragments.main
+package com.example.stockspokedex.ui.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.stockspokedex.R

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:checked="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home_page_heb"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/placeholder_action"
+        android:checkable="false"
+        android:enabled="false"
+        android:title="" />
+
+    <item
+        android:id="@+id/action_folder"
+        android:icon="@drawable/ic_baseline_accessible_forward_24"
+        android:title="פעולה 1"
+        app:showAsAction="ifRoom" />
+
+</menu>

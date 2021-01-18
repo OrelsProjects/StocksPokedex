@@ -1,3 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="topFooterTitleSize">28sp</dimen>
+
+    <dimen name="margin_start_144">144dp</dimen>
+    <dimen name="margin_end_144">144dp</dimen>
+    <dimen name="margin_top_144">144dp</dimen>
+    <dimen name="margin_bottom_144">144dp</dimen>
+
+    <dimen name="margin_start_128">128dp</dimen>
+    <dimen name="margin_end_128">128dp</dimen>
+    <dimen name="margin_top_128">128dp</dimen>
+    <dimen name="margin_bottom_128">128dp</dimen>
+
+    <dimen name="margin_start_120">120dp</dimen>
+    <dimen name="margin_end_120">120dp</dimen>
+    <dimen name="margin_top_120">120dp</dimen>
+    <dimen name="margin_bottom_120">120dp</dimen>
+
+    <dimen name="margin_start_96">96dp</dimen>
+    <dimen name="margin_end_96">96dp</dimen>
+    <dimen name="margin_top_96">96dp</dimen>
+    <dimen name="margin_bottom_96">96dp</dimen>
+
+
+    <dimen name="margin_start_72">72dp</dimen>
+    <dimen name="margin_end_72">72dp</dimen>
+    <dimen name="margin_top_72">72dp</dimen>
+    <dimen name="margin_bottom_72">72dp</dimen>
+
+    <dimen name="margin_start_48">48dp</dimen>
+    <dimen name="margin_end_48">48dp</dimen>
+    <dimen name="margin_top_48">48dp</dimen>
+    <dimen name="margin_bottom_48">48dp</dimen>
+
+    <dimen name="margin_start_24">24dp</dimen>
+    <dimen name="margin_end_24">24dp</dimen>
+    <dimen name="margin_top_24">24dp</dimen>
+    <dimen name="margin_bottom_24">24dp</dimen>
+
+    <dimen name="margin_start_20">20dp</dimen>
+    <dimen name="margin_end_20">20dp</dimen>
+    <dimen name="margin_top_20">20dp</dimen>
+    <dimen name="margin_bottom_20">20dp</dimen>
+
+    <dimen name="margin_start_16">16dp</dimen>
+    <dimen name="margin_end_16">16dp</dimen>
+    <dimen name="margin_top_16">16dp</dimen>
+    <dimen name="margin_bottom_16">16dp</dimen>
+
+    <dimen name="margin_top_8">8dp</dimen>
+    <dimen name="margin_bottom_8">8dp</dimen>
+    <dimen name="margin_start_8">8dp</dimen>
+    <dimen name="margin_end_8">8dp</dimen>
+
+    <dimen name="margin_top_4">4dp</dimen>
+    <dimen name="margin_bottom_4">4dp</dimen>
+    <dimen name="margin_start_4">4dp</dimen>
+    <dimen name="margin_end_4">4dp</dimen>
+
+    <dimen name="radius_2">2dp</dimen>
+    <dimen name="radius_8">8dp</dimen>
+    <dimen name="radius_16">16dp</dimen>
+    <dimen name="radius_24">24dp</dimen>
+    <dimen name="radius_32">32dp</dimen>
+
+    <dimen name="padding_1">1dp</dimen>
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_14">14dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+
+    <dimen name="text_12">12sp</dimen>
+    <dimen name="text_14">14sp</dimen>
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_18">18sp</dimen>
+    <dimen name="text_20">20sp</dimen>
+    <dimen name="text_22">22sp</dimen>
+    <dimen name="text_24">24sp</dimen>
+    <dimen name="text_26">26sp</dimen>
+    <dimen name="text_28">28sp</dimen>
+    <dimen name="text_30">30sp</dimen>
+    <dimen name="text_32">32sp</dimen>
+    <dimen name="text_64">64sp</dimen>
+
+    <dimen name="icon_24">24dp</dimen>
+    <dimen name="icon_28">28dp</dimen>
+    <dimen name="icon_32">32dp</dimen>
+
+    <dimen name="title_bar_size">60dp</dimen>
+    <dimen name="navbar_size">50dp</dimen>
+    <dimen name="navbar_icon_padding">@dimen/padding_10</dimen>
+
+    <dimen name="save_button_text_size">24sp</dimen>
+    <dimen name="save_button_width">160dp</dimen>
+    <dimen name="save_button_height">40dp</dimen>
+    <dimen name="cancel_button_width">160dp</dimen>
+    <dimen name="cancel_button_height">40dp</dimen>
+
 </resources>

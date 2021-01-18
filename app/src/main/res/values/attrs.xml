@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <attr name="transparent" format="color" />
-    <attr name="colorBackground" format="color"/>
+    <attr name="backgroundColor" format="color"/>
     <attr name="colorAccentDarker" format="color" />
     <attr name="colorAccentFaded" format="color" />
     <attr name="colorSeparatingLine" format="color" />

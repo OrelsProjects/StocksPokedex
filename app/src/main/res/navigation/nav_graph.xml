@@ -6,17 +6,21 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.stockspokedex.ui.fragments.main.LoginFragment"
-        android:label="LoginFragment" />
+        android:name="com.example.stockspokedex.ui.fragments.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            android:id="@+id/action_loginFragment_to_mainFragment"
+        app:destination="@id/mainFragment" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.stockspokedex.ui.fragments.main.MainFragment"
+        android:name="com.example.stockspokedex.ui.fragments.MainFragment"
         android:label="MainFragment" />
-
-    <action
-        android:id="@+id/loginActionToMainFragment"
-        app:destination="@id/mainFragment" />
 
 </navigation>
