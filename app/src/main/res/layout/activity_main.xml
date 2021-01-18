@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/flFragmentContainer"
@@ -37,10 +37,10 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addNewMessage"
+            android:id="@+id/addNewStockButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/add_stock_heb"
+            android:contentDescription="@string/add_stock"
             android:src="@drawable/ic_add"
             app:backgroundTint="?attr/colorAccent"
             app:elevation="10dp"
@@ -65,7 +65,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/background_transparent"
-            android:elevation="0dp"
             app:itemIconSize="@dimen/icon_32"
             app:itemTextColor="?attr/colorTextSecondary"
             app:labelVisibilityMode="labeled"

@@ -2,25 +2,20 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.stockspokedex.ui.fragments.LoginFragment"
-        android:label="LoginFragment">
-        <action
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            android:id="@+id/action_loginFragment_to_mainFragment"
-        app:destination="@id/mainFragment" />
-    </fragment>
-
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.stockspokedex.ui.fragments.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_addStockFragment"
+            app:destination="@id/addStockFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addStockFragment"
+        android:name="com.example.stockspokedex.ui.fragments.AddStockFragment"
+        android:label="AddStockFragment" />
 
 </navigation>

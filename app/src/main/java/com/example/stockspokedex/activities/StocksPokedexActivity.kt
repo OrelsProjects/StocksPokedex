@@ -1,4 +1,4 @@
-package com.example.stockspokedex
+package com.example.stockspokedex.activities
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

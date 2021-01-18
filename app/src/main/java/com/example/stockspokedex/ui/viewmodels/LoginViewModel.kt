@@ -3,18 +3,17 @@ package com.example.stockspokedex.ui.viewmodels
 import androidx.hilt.lifecycle.ViewModelInject
 import com.example.stockspokedex.ui.base.BaseViewModel
 import com.example.stockspokedex.ui.viewstates.LoginViewState
-import javax.inject.Inject
 
 class LoginViewModel @ViewModelInject constructor(
-    private val loginViewState: LoginViewState
+    private val viewState: LoginViewState
 ) : BaseViewModel<LoginViewState>() {
 
 
-    override fun getViewState(): LoginViewState = loginViewState
+    override fun getViewState(): LoginViewState = viewState
 
     fun handleLogin() {
         // Todo implement login
-        loginViewState.isLoginSuccessful = true
+        viewState.isLoginSuccessful = true
         updateUI()
     }
 }

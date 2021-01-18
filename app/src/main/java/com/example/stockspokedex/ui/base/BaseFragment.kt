@@ -1,14 +1,12 @@
 package com.example.stockspokedex.ui.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 
-abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState>() :
+abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState> :
     Fragment() {
 
     protected open fun onBindViewModel() {
@@ -18,6 +16,8 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState>() :
     protected open fun onUnbindViewModel() {
         // Empty lifecycle function to be overridden
     }
+
+    abstract fun setCurrentFragment()
 
     abstract fun initViewModel()
 
@@ -35,12 +35,8 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState>() :
         savedInstanceState: Bundle?
     ): View {
         initViewModel()
+        setCurrentFragment()
         return inflater.inflate(getLayoutResourceFile(), container, false)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,7 +56,7 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState>() :
 
     @Suppress("UNCHECKED_CAST")
     private fun observeState() {
-        getViewModel().getState().observe(this, Observer { state -> updateUI(state as S) })
+        getViewModel().getState().observe(this, { state -> updateUI(state as S) })
     }
 
 }

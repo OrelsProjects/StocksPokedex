@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.StocksPokedex" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="transparent">#00ffffff</item>
@@ -30,4 +30,15 @@
     <style name="Theme.StocksPokedex.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.StocksPokedex.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense">
+        <item name="colorPrimary">?attr/colorRedVariant</item>
+        <item name="colorPrimaryDark">?attr/colorAccentDarker</item>
+        <item name="colorAccent">?attr/colorAccent</item>
+        <item name="colorControlActivated">?attr/colorRedVariant</item>
+        <item name="hintTextColor">?attr/colorTextSecondary</item>
+        <item name="colorControlNormal">?attr/colorTextSecondary</item>
+        <item name="colorError">?attr/colorRedVariant</item>
+    </style>
+
 </resources>

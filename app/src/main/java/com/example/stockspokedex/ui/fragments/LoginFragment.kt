@@ -1,17 +1,15 @@
 package com.example.stockspokedex.ui.fragments
 
+import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import com.example.stockspokedex.MainActivity
 import com.example.stockspokedex.R
+import com.example.stockspokedex.activities.MainActivity
 import com.example.stockspokedex.ui.base.BaseFragment
 import com.example.stockspokedex.ui.viewmodels.LoginViewModel
 import com.example.stockspokedex.ui.viewstates.LoginViewState
+import com.example.stockspokedex.utils.General
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_login.*
 
 @AndroidEntryPoint
@@ -27,7 +25,9 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewState>(), View.OnCli
 
     override fun updateUI(state: LoginViewState) {
         if(state.isLoginSuccessful){
-            activity?.navHostFragment?.findNavController()?.navigate(R.id.action_loginFragment_to_mainFragment)
+            val mainActivityIntent = Intent(context, MainActivity::class.java)
+            mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context?.startActivity(mainActivityIntent)
         }
     }
 
@@ -42,5 +42,9 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewState>(), View.OnCli
                 viewModel.handleLogin()
             }
         }
+    }
+
+    override fun setCurrentFragment() {
+        General.presentedFragment = General.Fragments.Login
     }
 }
