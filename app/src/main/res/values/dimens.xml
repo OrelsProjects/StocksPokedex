@@ -90,9 +90,11 @@
     <dimen name="icon_28">28dp</dimen>
     <dimen name="icon_32">32dp</dimen>
 
-    <dimen name="title_bar_size">60dp</dimen>
-    <dimen name="navbar_size">50dp</dimen>
-    <dimen name="navbar_icon_padding">@dimen/padding_10</dimen>
+<!--    <dimen name="title_bar_size">60dp</dimen>-->
+<!--    <dimen name="navbar_size">50dp</dimen>-->
+<!--    <dimen name="navbar_icon_padding">@dimen/padding_10</dimen>-->
+    <dimen name="radio_button_size">36dp</dimen>
+<!--    <dimen name="radio_button_height">20dp</dimen>-->
 
     <dimen name="save_button_text_size">24sp</dimen>
     <dimen name="save_button_width">160dp</dimen>

@@ -13,7 +13,8 @@ import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.General
 import kotlinx.android.synthetic.main.fragment_add_stock.*
 
-class AddStockFragment : BaseFragment<AddStockViewModel, AddStockViewState>(), View.OnClickListener {
+class AddStockFragment : BaseFragment<AddStockViewModel, AddStockViewState>(),
+    View.OnClickListener {
 
     private lateinit var viewModel: AddStockViewModel
 
@@ -29,24 +30,35 @@ class AddStockFragment : BaseFragment<AddStockViewModel, AddStockViewState>(), V
 
     override fun attachClickListeners() {
         addStockBackground.setOnClickListener(this)
+        checklistLayout.setOnClickListener(this)
     }
 
     override fun getLayoutResourceFile(): Int = R.layout.fragment_add_stock
 
     @SuppressLint("RestrictedApi")
-    private fun onBackgroundClick(){
+    private fun onBackgroundClick() {
         clearFocus()
         tickerEdit.supportBackgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF00FF"));
         AppUtils.hideKeyboard(activity)
     }
 
-    private fun clearFocus(){
+
+    private fun clearFocus() {
         tickerInput.clearFocus()
     }
 
+    private fun showChecklist(){
+        if(checklistFlexbox.visibility == View.VISIBLE) {
+            checklistFlexbox.visibility = View.GONE
+        } else {
+            checklistFlexbox.visibility = View.VISIBLE
+        }
+    }
+
     override fun onClick(v: View) {
-        when(v.id){
+        when (v.id) {
             R.id.addStockBackground -> onBackgroundClick()
+            R.id.checklistLayout -> showChecklist()
         }
     }
 

@@ -14,4 +14,13 @@
     <string name="add_stock">Add Stock</string>
     <string name="ticker">Ticker</string>
     <string name="company_name">Company name</string>
+    <string name="placeholder">placeholder</string>
+    <string name="ceo">CEO</string>
+    <string name="news">News</string>
+    <string name="_10k">10K</string>
+    <string name="conference_call">Conference Call</string>
+    <string name="_10q">10Q</string>
+    <string name="investors_presentation">Investors Presentation</string>
+    <string name="check_list">Check List</string>
+    <string name="show_todo_list">show todo list</string>
 </resources>
