@@ -23,4 +23,5 @@
     <string name="investors_presentation">Investors Presentation</string>
     <string name="check_list">Check List</string>
     <string name="show_todo_list">show todo list</string>
+    <string name="basic_info">Basic info</string>
 </resources>

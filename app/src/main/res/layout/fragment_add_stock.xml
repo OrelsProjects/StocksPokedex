@@ -1,202 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/addStockBackground"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/backgroundColor">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tickerInput"
-        style="@style/TextInput"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addStockBackground"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_start_24"
-        android:layout_marginTop="@dimen/margin_top_24"
-        android:layout_marginEnd="@dimen/margin_end_24"
-        android:hint="@string/ticker"
-        android:textColorHint="?attr/colorTextSecondary"
-        app:boxBackgroundColor="?attr/backgroundColor"
-        app:boxStrokeColor="?attr/colorAccent"
-        app:hintTextColor="?attr/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tickerEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lines="1"
-            android:maxLines="1"
-            android:paddingStart="0dp"
-            android:textColor="?attr/colorTextPrimary"
-            android:textColorHint="?attr/colorTextSecondary"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/companyNameInput"
-        style="@style/TextInput"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_start_24"
-        android:layout_marginTop="@dimen/margin_top_24"
-        android:layout_marginEnd="@dimen/margin_end_24"
-        android:hint="@string/company_name"
-        android:textColorHint="?attr/colorTextSecondary"
-        app:boxBackgroundColor="?attr/backgroundColor"
-        app:boxStrokeColor="?attr/colorAccent"
-        app:hintTextColor="?attr/colorAccent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tickerInput">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/companyNameEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lines="1"
-            android:maxLines="1"
-            android:paddingStart="0dp"
-            android:textColor="?attr/colorTextPrimary"
-            android:textColorHint="?attr/colorTextSecondary"
-            android:textSize="20sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/checklistLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_start_24"
-        android:layout_marginTop="@dimen/margin_top_24"
-        android:gravity="center|center_vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/companyNameInput">
+        android:layout_height="0dp"
+        android:background="?attr/backgroundColor">
 
         <TextView
-            android:id="@+id/checkListText"
+            android:id="@+id/basicInfoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/check_list"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_32" />
-
-        <ImageView
-            android:id="@+id/toggleChecklistImage"
-            android:layout_width="@dimen/icon_28"
-            android:layout_height="@dimen/icon_28"
-            android:layout_marginTop="@dimen/margin_top_4"
-            android:contentDescription="@string/show_todo_list"
-            android:rotation="270"
-            android:src="@drawable/ic_chevron_left" />
-    </LinearLayout>
-
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/checklistFlexbox"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/margin_start_24"
-        android:layout_marginTop="@dimen/margin_top_24"
-        android:animateLayoutChanges="true"
-        app:alignItems="flex_start"
-        app:flexDirection="column"
-        app:flexWrap="wrap"
-        app:layout_anchorGravity="start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checklistLayout">
-
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/tenKRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:gravity="center"
-            android:text="@string/_10k"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="@dimen/margin_start_4"
+            android:layout_marginTop="@dimen/margin_top_24"
+            android:text="@string/basic_info"
+            android:textColor="?attr/colorTextSecondaryVariant"
+            android:textSize="@dimen/text_18"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/ceoRadio"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tickerInput"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_start_24"
             android:layout_marginTop="@dimen/margin_top_8"
             android:layout_marginEnd="@dimen/margin_end_24"
-            android:gravity="center"
-            android:text="@string/ceo"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/ticker"
+            android:textColorHint="?attr/colorTextSecondary"
+            app:boxBackgroundColor="?attr/backgroundColor"
+            app:hintTextColor="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/basicInfoText">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/ccRadio"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tickerEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:textColor="?attr/colorTextPrimary"
+                android:textColorHint="?attr/colorTextSecondary"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/companyNameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_start_24"
+            android:layout_marginTop="@dimen/margin_top_24"
+            android:layout_marginEnd="@dimen/margin_end_24"
+            android:hint="@string/company_name"
+            android:textColorHint="?attr/colorTextSecondary"
+            app:boxBackgroundColor="?attr/backgroundColor"
+            app:hintTextColor="?attr/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tickerInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/companyNameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:textColor="?attr/colorTextPrimary"
+                android:textColorHint="?attr/colorTextSecondary"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/checklistLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_top_8"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:gravity="center"
-            android:text="@string/conference_call"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/margin_start_4"
+            android:layout_marginTop="@dimen/margin_top_24"
+            android:gravity="center|center_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/companyNameInput">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/tenQRadio"
+            <TextView
+                android:id="@+id/checkListText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/check_list"
+                android:textColor="?attr/colorTextSecondaryVariant"
+                android:textSize="@dimen/text_18" />
+
+            <ImageView
+                android:id="@+id/checklistToggleImage"
+                android:layout_width="@dimen/icon_24"
+                android:layout_height="@dimen/icon_24"
+                android:layout_marginTop="@dimen/margin_top_2"
+                android:contentDescription="@string/show_todo_list"
+                android:rotation="270"
+                android:src="@drawable/ic_chevron_left" />
+        </LinearLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/checklistFlexbox"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_top_8"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:gravity="center"
-            android:text="@string/_10q"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_start_24"
+            android:layout_marginTop="@dimen/margin_top_24"
+            android:animateLayoutChanges="true"
+            android:background="?attr/backgroundColor"
+            app:alignItems="flex_start"
+            app:flexDirection="column"
+            app:flexWrap="wrap"
+            app:layout_anchorGravity="start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checklistLayout">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/presentationRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_top_8"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:gravity="center"
-            android:text="@string/investors_presentation"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/tenKRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:gravity="center"
+                android:text="@string/_10k"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="@dimen/text_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/newsRadio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="@dimen/margin_top_8"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:gravity="center"
-            android:text="@string/news"
-            android:textColor="?attr/colorTextPrimary"
-            android:textSize="@dimen/text_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/ceoRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_8"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:gravity="center"
+                android:text="@string/ceo"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="@dimen/text_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </com.google.android.flexbox.FlexboxLayout>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/ccRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_8"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:gravity="center"
+                android:text="@string/conference_call"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="@dimen/text_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/tenQRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_8"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:gravity="center"
+                android:text="@string/_10q"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="@dimen/text_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/presentationRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_8"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:gravity="center"
+                android:text="@string/investors_presentation"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="@dimen/text_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/newsRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="@dimen/margin_top_8"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:gravity="center"
+                android:text="@string/news"
+                android:textColor="?attr/colorTextPrimary"
+                android:textSize="@dimen/text_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.flexbox.FlexboxLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

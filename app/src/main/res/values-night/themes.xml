@@ -10,6 +10,7 @@
         <item name="colorAccentVariant">#7F6AD5</item>
         <item name="colorAccentFaded">#207858FE</item>
         <item name="colorTextSecondary">#757575</item>
+        <item name="colorTextSecondaryVariant">#CDCBCBD1</item>
         <item name="colorTextPrimary">#DFE3E6</item>
         <item name="android:textColor">#DFE3E6</item>
         <item name="colorSeparatingLine">#151C21</item>

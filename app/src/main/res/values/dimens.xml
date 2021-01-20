@@ -58,6 +58,11 @@
     <dimen name="margin_start_4">4dp</dimen>
     <dimen name="margin_end_4">4dp</dimen>
 
+    <dimen name="margin_top_2">2dp</dimen>
+    <dimen name="margin_bottom_2">2dp</dimen>
+    <dimen name="margin_start_2">2dp</dimen>
+    <dimen name="margin_end_2">2dp</dimen>
+
     <dimen name="radius_2">2dp</dimen>
     <dimen name="radius_8">8dp</dimen>
     <dimen name="radius_16">16dp</dimen>

@@ -13,4 +13,5 @@
     <attr name="colorProgressSeekbar" format="color" />
     <attr name="colorTextPrimary" format="color" />
     <attr name="colorTextSecondary" format="color"/>
+    <attr name="colorTextSecondaryVariant" format="color"/>
 </resources>

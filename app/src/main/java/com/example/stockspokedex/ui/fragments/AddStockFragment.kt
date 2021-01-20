@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.View
+import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import com.example.stockspokedex.R
 import com.example.stockspokedex.ui.base.BaseFragment
 import com.example.stockspokedex.ui.viewmodels.AddStockViewModel
 import com.example.stockspokedex.ui.viewstates.AddStockViewState
 import com.example.stockspokedex.utils.AppUtils
+import com.example.stockspokedex.utils.AppUtils.hideKeyboard
 import com.example.stockspokedex.utils.General
 import kotlinx.android.synthetic.main.fragment_add_stock.*
 
@@ -38,20 +40,42 @@ class AddStockFragment : BaseFragment<AddStockViewModel, AddStockViewState>(),
     @SuppressLint("RestrictedApi")
     private fun onBackgroundClick() {
         clearFocus()
-        tickerEdit.supportBackgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF00FF"));
-        AppUtils.hideKeyboard(activity)
+        hideKeyboard()
     }
 
 
     private fun clearFocus() {
         tickerInput.clearFocus()
+        companyNameInput.clearFocus()
     }
 
-    private fun showChecklist(){
-        if(checklistFlexbox.visibility == View.VISIBLE) {
-            checklistFlexbox.visibility = View.GONE
+    private fun showChecklist() {
+        if (checklistFlexbox.getChildAt(0).visibility == View.VISIBLE) {
+            rotateChecklistToggleClose()
+            removeItemsFromChecklist()
         } else {
-            checklistFlexbox.visibility = View.VISIBLE
+            rotateChecklistOpen()
+            showItemsInChecklist()
+        }
+    }
+
+    private fun rotateChecklistToggleClose() {
+        checklistToggleImage.animate().rotation(90f).setDuration(200).start()
+    }
+
+    private fun rotateChecklistOpen(){
+        checklistToggleImage.animate().rotation(270f).setDuration(200).start()
+    }
+
+    private fun removeItemsFromChecklist(){
+        checklistFlexbox.children.forEach {
+            it.visibility = View.GONE
+        }
+    }
+
+    private fun showItemsInChecklist(){
+        checklistFlexbox.children.forEach {
+            it.visibility = View.VISIBLE
         }
     }
 
