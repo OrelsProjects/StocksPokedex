@@ -1,0 +1,32 @@
+<LinearLayout android:id="@+id/priceTargetLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/margin_start_4"
+    android:layout_marginTop="@dimen/margin_top_24"
+    android:animateLayoutChanges="true"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/bullishThesisLayout"
+    tools:ignore="UseCompoundDrawables"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/priceTargetText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price_target"
+        android:textColor="?attr/colorTextSecondaryVariant"
+        android:textSize="@dimen/text_18" />
+
+    <ImageView
+        android:id="@+id/addPriceTargetFileImage"
+        android:layout_width="@dimen/icon_28"
+        android:layout_height="@dimen/icon_28"
+        android:layout_marginStart="@dimen/margin_start_8"
+        android:background="@drawable/round_button_ripple"
+        android:contentDescription="@string/add_a_price_target_file"
+        android:src="@drawable/ic_add_file" />
+</LinearLayout>

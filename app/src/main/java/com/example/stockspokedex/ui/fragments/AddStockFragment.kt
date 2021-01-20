@@ -13,6 +13,9 @@ import com.example.stockspokedex.ui.viewstates.AddStockViewState
 import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.AppUtils.hideKeyboard
 import com.example.stockspokedex.utils.General
+import kotlinx.android.synthetic.main.add_file_bullish_thesis.*
+import kotlinx.android.synthetic.main.add_file_dcf.*
+import kotlinx.android.synthetic.main.add_file_price_target.*
 import kotlinx.android.synthetic.main.fragment_add_stock.*
 
 class AddStockFragment : BaseFragment<AddStockViewModel, AddStockViewState>(),
@@ -33,11 +36,13 @@ class AddStockFragment : BaseFragment<AddStockViewModel, AddStockViewState>(),
     override fun attachClickListeners() {
         addStockBackground.setOnClickListener(this)
         checklistLayout.setOnClickListener(this)
+        addBullishThesisFileImage.setOnClickListener(this)
+        addPriceTargetFileImage.setOnClickListener(this)
+        addDCFFileImage.setOnClickListener(this)
     }
 
     override fun getLayoutResourceFile(): Int = R.layout.fragment_add_stock
 
-    @SuppressLint("RestrictedApi")
     private fun onBackgroundClick() {
         clearFocus()
         hideKeyboard()

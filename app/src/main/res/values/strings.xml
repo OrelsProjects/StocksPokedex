@@ -21,7 +21,13 @@
     <string name="conference_call">Conference Call</string>
     <string name="_10q">10Q</string>
     <string name="investors_presentation">Investors Presentation</string>
-    <string name="check_list">Check List</string>
+    <string name="checklist">Checklist</string>
     <string name="show_todo_list">show todo list</string>
     <string name="basic_info">Basic info</string>
+    <string name="add_a_bullish_thesis_file">add a bullish thesis file</string>
+    <string name="bullish_thesis">Bullish thesis</string>
+    <string name="price_target">Price target</string>
+    <string name="add_a_dcf_file_button">Add a DCF file button</string>
+    <string name="add_a_price_target_file">Add a price target file</string>
+    <string name="discounted_cash_flow">Discounted Cash Flow</string>
 </resources>
