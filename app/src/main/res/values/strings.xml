@@ -7,6 +7,8 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="local_db_name">Stocks Cache</string>
+
     <string name="google_heb">גוגל</string>
     <string name="google_login">google login</string>
     <string name="login">Login</string>
@@ -30,4 +32,5 @@
     <string name="add_a_dcf_file_button">Add a DCF file button</string>
     <string name="add_a_price_target_file">Add a price target file</string>
     <string name="discounted_cash_flow">Discounted Cash Flow</string>
+    <string name="save">Save</string>
 </resources>

@@ -8,14 +8,7 @@
         android:id="@+id/mainFragment"
         android:name="com.example.stockspokedex.ui.fragments.MainFragment"
         android:label="MainFragment">
-        <action
-            android:id="@+id/action_mainFragment_to_addStockFragment"
-            app:destination="@id/addStockFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/addStockFragment"
-        android:name="com.example.stockspokedex.ui.fragments.AddStockFragment"
-        android:label="AddStockFragment" />
 
 </navigation>

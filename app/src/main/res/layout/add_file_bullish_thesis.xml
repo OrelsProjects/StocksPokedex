@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/bullishThesisLayout"
+<RelativeLayout android:id="@+id/bullishThesisLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_start_4"
@@ -28,6 +28,15 @@
         android:layout_height="@dimen/icon_28"
         android:layout_marginStart="@dimen/margin_start_8"
         android:background="@drawable/round_button_ripple"
+        android:layout_toEndOf="@id/bullishThesisText"
         android:contentDescription="@string/add_a_bullish_thesis_file"
         android:src="@drawable/ic_add_file" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/bullishThesisFileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bullishThesisText"
+        android:textColor="?attr/colorTextSecondary"
+        android:textSize="@dimen/text_14" />
+</RelativeLayout>

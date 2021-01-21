@@ -1,5 +1,6 @@
 package com.example.stockspokedex.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     private fun attachOnClickListeners() {
-        addNewStockButton.setOnClickListener(this)
+        mainFAB.setOnClickListener(this)
         bottomMenuBar.setOnNavigationItemSelectedListener(this)
     }
 
@@ -32,25 +33,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         navHostFragment.findNavController().navigate(R.id.mainFragment)
     }
 
-    private fun showAddStockFragment() {
-        if (General.presentedFragment == General.Fragments.AddStock) return
-        navHostFragment.findNavController()
-            .navigate(R.id.action_mainFragment_to_addStockFragment)
-        selectPlaceholderIcon()
+    private fun showAddStockActivity() {
+        val addStockActivityIntent = Intent(this, AddStockActivity::class.java)
+        addStockActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        this.startActivity(addStockActivityIntent)
     }
-
-    private fun selectPlaceholderIcon() {
-        for (i in 0 until bottomMenuBar.menu.size()) {
-            if (bottomMenuBar.menu.getItem(i).itemId == R.id.placeholder_action) {
-                bottomMenuBar.menu.getItem(i).isChecked = true
-                return
-            }
-        }
-    }
+//
+//    private fun selectPlaceholderIcon() {
+//        for (i in 0 until bottomMenuBar.menu.size()) {
+//            if (bottomMenuBar.menu.getItem(i).itemId == R.id.placeholder_action) {
+//                bottomMenuBar.menu.getItem(i).isChecked = true
+//                return
+//            }
+//        }
+//    }
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.addNewStockButton -> showAddStockFragment()
+            R.id.mainFAB -> {
+                showAddStockActivity()
+            }
         }
     }
 

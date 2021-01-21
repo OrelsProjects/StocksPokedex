@@ -1,4 +1,7 @@
-<LinearLayout android:id="@+id/priceTargetLayout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/priceTargetLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_start_4"
@@ -8,10 +11,7 @@
     android:orientation="horizontal"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/bullishThesisLayout"
-    tools:ignore="UseCompoundDrawables"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    tools:ignore="UseCompoundDrawables">
 
     <TextView
         android:id="@+id/priceTargetText"
@@ -26,7 +26,16 @@
         android:layout_width="@dimen/icon_28"
         android:layout_height="@dimen/icon_28"
         android:layout_marginStart="@dimen/margin_start_8"
+        android:layout_toEndOf="@id/priceTargetText"
         android:background="@drawable/round_button_ripple"
         android:contentDescription="@string/add_a_price_target_file"
         android:src="@drawable/ic_add_file" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/priceTargetFileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceTargetText"
+        android:textColor="?attr/colorTextSecondary"
+        android:textSize="@dimen/text_14" />
+</RelativeLayout>

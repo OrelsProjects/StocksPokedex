@@ -17,6 +17,8 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState> :
         // Empty lifecycle function to be overridden
     }
 
+    open fun onViewCreated(){}
+
     abstract fun setCurrentFragment()
 
     abstract fun initViewModel()
@@ -28,6 +30,8 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState> :
     abstract fun attachClickListeners()
 
     abstract fun getLayoutResourceFile(): Int
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +46,7 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState> :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         attachClickListeners()
+        onViewCreated()
     }
 
     override fun onResume() {

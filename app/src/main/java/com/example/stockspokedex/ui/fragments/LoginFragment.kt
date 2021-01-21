@@ -29,6 +29,7 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewState>(), View.OnCli
             mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context?.startActivity(mainActivityIntent)
         }
+        state.reset()
     }
 
     override fun attachClickListeners() {

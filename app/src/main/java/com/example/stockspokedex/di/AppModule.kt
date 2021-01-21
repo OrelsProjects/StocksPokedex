@@ -1,5 +1,6 @@
 package com.example.stockspokedex.di
 
+import com.example.stockspokedex.ui.fragments.AddStockFragment
 import com.example.stockspokedex.ui.fragments.LoginFragment
 import com.example.stockspokedex.ui.viewstates.AddStockViewState
 import com.example.stockspokedex.ui.viewstates.LoginViewState
@@ -33,4 +34,7 @@ object AppModule {
     @Provides
     fun provideLoginFragment() = LoginFragment()
 
+    @Singleton
+    @Provides
+    fun provideAddStockFragment() = AddStockFragment()
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundColor"
     tools:context=".activities.MainActivity">
 
     <FrameLayout
@@ -37,13 +38,13 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addNewStockButton"
+            android:id="@+id/mainFAB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/add_stock"
+            android:elevation="10dp"
             android:src="@drawable/ic_add"
             app:backgroundTint="?attr/colorAccent"
-            app:elevation="10dp"
             app:fabSize="normal"
             app:layout_anchor="@id/bottomAppBar" />
 
