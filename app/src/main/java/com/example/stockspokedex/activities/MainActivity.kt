@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.example.stockspokedex.R
+import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.General
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         attachOnClickListeners()
+        AppUtils.setNotificationAndNavigationBarsColors(this)
     }
 
     private fun attachOnClickListeners() {

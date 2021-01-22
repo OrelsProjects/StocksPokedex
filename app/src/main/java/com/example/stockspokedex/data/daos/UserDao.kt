@@ -8,7 +8,7 @@ interface UserDao {
     /**
      * Inserts a user to the cache.
      */
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: UserEntity)
 
     /**
@@ -30,7 +30,7 @@ interface UserDao {
     fun updateUser(user: UserEntity)
 
     /**
-     * Returns a user with uid = [id].
+     * Fetches a user with uid = [id].
      * @param id is the id of the company requested.
      */
     @Query("select * from UserEntity where uid = :id")

@@ -18,5 +18,6 @@ class LoginActivity  : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         AppUtils.addFragmentToActivity(supportFragmentManager, loginFragment, R.id.contentFrameLogin)
+        AppUtils.setNotificationAndNavigationBarsColors(this)
     }
 }

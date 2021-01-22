@@ -27,5 +27,7 @@ class CompanyInteractorImpl @Inject constructor(private val db: CompanyDao) : Co
 
     override fun getCompany(companyID: String): CompanyEntity = db.getCompany(companyID)
 
-    override fun getAllCompanies(): LiveData<List<CompanyEntity>> = db.getAllCompanies()
+    override fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>> = db.getAllCompaniesAsync()
+
+    override fun getAllCompaniesSync(): List<CompanyEntity> = db.getAllCompaniesSync()
 }

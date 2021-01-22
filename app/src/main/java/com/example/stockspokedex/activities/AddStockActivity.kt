@@ -18,5 +18,6 @@ class AddStockActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_stock)
         AppUtils.addFragmentToActivity(supportFragmentManager, addStockFragment, R.id.contentFrameLogin)
+        AppUtils.setNotificationAndNavigationBarsColors(this)
     }
 }

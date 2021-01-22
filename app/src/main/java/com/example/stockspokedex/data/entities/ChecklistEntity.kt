@@ -12,5 +12,5 @@ data class ChecklistEntity(
     @ColumnInfo var tenQ: Boolean = false,
     @ColumnInfo var investorsPresentation: Boolean = false,
     @ColumnInfo var news: Boolean = false,
-    @ColumnInfo var isActive: Boolean = false
+    @ColumnInfo var isActive: Boolean = true
 )

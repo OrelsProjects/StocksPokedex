@@ -9,9 +9,9 @@ import javax.inject.Inject
 class ChecklistInteractorImpl @Inject constructor(private val db: ChecklistDao) :
     ChecklistInteractor {
 
-    override fun insertChecklist(checklist: ChecklistEntity) {
+    override fun insertChecklist(checklist: ChecklistEntity) =
         db.insertChecklist(checklist)
-    }
+
 
     override fun deleteChecklist(checklist: ChecklistEntity) {
         db.deleteChecklist(checklist)
@@ -27,5 +27,5 @@ class ChecklistInteractorImpl @Inject constructor(private val db: ChecklistDao) 
 
     override fun getChecklist(checklistID: String): ChecklistEntity = db.getChecklist(checklistID)
 
-    override fun getAllChecklists(): LiveData<List<ChecklistEntity>> = db.getAllChecklists()
+    override fun getAllChecklists(): List<ChecklistEntity> = db.getAllChecklists()
 }

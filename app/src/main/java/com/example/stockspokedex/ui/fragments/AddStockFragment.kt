@@ -28,7 +28,6 @@ import kotlinx.android.synthetic.main.fragment_add_stock.*
 import java.util.*
 import javax.inject.Inject
 
-@AndroidEntryPoint
 class AddStockFragment @Inject constructor(
 ) : BaseFragment<AddStockViewModel, AddStockViewState>(),
     View.OnClickListener {
@@ -42,9 +41,6 @@ class AddStockFragment @Inject constructor(
     override fun getViewModel(): AddStockViewModel = viewModel
 
     override fun updateUI(state: AddStockViewState) {
-        state.companies.observe(this, {
-            println()
-        })
         if (state.isStockSaveDone) {
             navigateMainActivity()
         }

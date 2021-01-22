@@ -12,7 +12,6 @@ import com.example.stockspokedex.utils.General
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 
-@AndroidEntryPoint
 class LoginFragment : BaseFragment<LoginViewModel, LoginViewState>(), View.OnClickListener {
 
     private lateinit var viewModel: LoginViewModel

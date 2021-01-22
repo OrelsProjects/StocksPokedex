@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.StocksPokedex" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <item name="transparent">#00ffffff</item>
@@ -21,6 +21,9 @@
         <item name="colorStatisticsFaded">#200F9AF7</item>
         <item name="colorProgressSeekbar">#805F528F</item>
         <item name="colorControlHighlight">?attr/colorTextSecondary</item>
+        <item  name="android:fontFamily">@font/varelaround</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.StocksPokedex.NoActionBar">

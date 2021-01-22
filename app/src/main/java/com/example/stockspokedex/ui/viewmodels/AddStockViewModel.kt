@@ -18,11 +18,12 @@ class AddStockViewModel @ViewModelInject constructor(
 
     override fun getViewState(): AddStockViewState = viewState
 
-    fun handleSaveStock(company: CompanyEntity, checklistEntity: ChecklistEntity){
-        checklistInteractor.insertChecklist(checklistEntity)
+    fun handleSaveStock(company: CompanyEntity, checklist: ChecklistEntity) {
+        checklistInteractor.insertChecklist(checklist)
+        company.checklistID = checklist.checklistID
         companyInteractor.insertCompany(company)
         viewState.isStockSaveDone = true
-        viewState.companies = companyInteractor.getAllCompanies()
+        viewState.companies = companyInteractor.getAllCompaniesAsync()
         updateUI()
     }
 }

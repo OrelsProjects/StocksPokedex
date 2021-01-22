@@ -21,5 +21,8 @@
         <item name="colorStatisticsFaded">#200F9AF7</item>
         <item name="colorProgressSeekbar">#805F528F</item>
         <item name="colorControlHighlight">?attr/colorTextSecondary</item>
+        <item name="android:fontFamily">@font/varelaround</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

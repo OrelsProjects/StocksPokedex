@@ -9,5 +9,6 @@ interface CompanyInteractor {
     fun deleteCompanies(companyIDs: List<String>)
     fun updateCompany(company: CompanyEntity)
     fun getCompany(companyID: String): CompanyEntity
-    fun getAllCompanies(): LiveData<List<CompanyEntity>>
+    fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>>
+    fun getAllCompaniesSync(): List<CompanyEntity>
 }

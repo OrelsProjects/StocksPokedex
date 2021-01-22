@@ -31,14 +31,21 @@ interface CompanyDao {
     fun updateCompany(company: CompanyEntity)
 
     /**
-     * Returns a list of all the companies.
+     * Fetches a livedata list of all the companies.
      * @return a livedata object of the companies.
      */
     @Query("select * from CompanyEntity where isActive = 1")
-    fun getAllCompanies(): LiveData<List<CompanyEntity>>
+    fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>>
 
     /**
-     * Returns a company with companyID = [id].
+     * Fetches a list of all the companies.
+     * @return a list of all the companies.
+     */
+    @Query("select * from CompanyEntity where isActive = 1")
+    fun getAllCompaniesSync(): List<CompanyEntity>
+
+    /**
+     * Fetches a company with companyID = [id].
      * @param id is the id of the company requested.
      */
     @Query("select * from CompanyEntity where companyID = :id")

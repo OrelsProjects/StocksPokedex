@@ -31,14 +31,14 @@ interface ChecklistDao {
     fun updateChecklist(checklist: ChecklistEntity)
 
     /**
-     * Returns a list of all the checklists.
+     * Fetches a list of all the checklists.
      * @return a livedata object of the companies.
      */
     @Query("select * from ChecklistEntity where isActive = 1")
-    fun getAllChecklists(): LiveData<List<ChecklistEntity>>
+    fun getAllChecklists(): List<ChecklistEntity>
 
     /**
-     * Returns a user with checklistID = [id].
+     * Fetches a user with checklistID = [id].
      * @param id is the id of the checklist requested.
      */
     @Query("select * from ChecklistEntity where checklistID = :id")

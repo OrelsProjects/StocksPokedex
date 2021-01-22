@@ -12,5 +12,5 @@ data class UserEntity(
     @ColumnInfo var nickName: String = "",
     @ColumnInfo var firstName: String = "",
     @ColumnInfo var lastName: String = "",
-    @ColumnInfo var isActive: Boolean = false
+    @ColumnInfo var isActive: Boolean = true
 )
