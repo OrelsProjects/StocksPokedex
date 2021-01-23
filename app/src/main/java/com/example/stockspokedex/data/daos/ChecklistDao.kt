@@ -1,8 +1,7 @@
 package com.example.stockspokedex.data.daos
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.stockspokedex.data.entities.ChecklistEntity
+import com.example.stockspokedex.data.entities.db.ChecklistEntity
 
 @Dao
 interface ChecklistDao {

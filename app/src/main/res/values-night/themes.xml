@@ -22,6 +22,7 @@
         <item name="colorProgressSeekbar">#805F528F</item>
         <item name="colorControlHighlight">?attr/colorTextSecondary</item>
         <item name="android:fontFamily">@font/varelaround</item>
+        <item name="colorRipple">#8B959595</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
         <item name="android:windowLightStatusBar">false</item>
     </style>

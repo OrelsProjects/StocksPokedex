@@ -7,13 +7,14 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import com.example.stockspokedex.R
 import com.example.stockspokedex.activities.MainActivity
-import com.example.stockspokedex.data.entities.ChecklistEntity
-import com.example.stockspokedex.data.entities.CompanyEntity
+import com.example.stockspokedex.data.entities.db.ChecklistEntity
+import com.example.stockspokedex.data.entities.db.CompanyEntity
 import com.example.stockspokedex.ui.base.BaseFragment
 import com.example.stockspokedex.ui.viewmodels.AddStockViewModel
 import com.example.stockspokedex.ui.viewstates.AddStockViewState
 import com.example.stockspokedex.utils.AppUtils.hideKeyboard
 import com.example.stockspokedex.utils.General
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.add_file_bullish_thesis.*
 import kotlinx.android.synthetic.main.add_file_dcf.*
@@ -42,7 +43,11 @@ class AddStockFragment @Inject constructor(
 
     override fun updateUI(state: AddStockViewState) {
         if (state.isStockSaveDone) {
-            navigateMainActivity()
+            if (state.isCompanyExistsInDB) {
+                setErrorToField(companyNameInput, "The company already exists in your list.")
+            } else {
+                navigateMainActivity()
+            }
         }
         state.reset()
     }
@@ -54,6 +59,7 @@ class AddStockFragment @Inject constructor(
         addPriceTargetFileImage.setOnClickListener(this)
         addDCFFileImage.setOnClickListener(this)
         saveStockButton.setOnClickListener(this)
+        cancelStockButton.setOnClickListener(this)
         tenKRadio.setOnClickListener(this)
         ceoRadio.setOnClickListener(this)
         ccRadio.setOnClickListener(this)
@@ -75,13 +81,18 @@ class AddStockFragment @Inject constructor(
 
 
     private fun clearFocus() {
-        tickerInput.clearFocus()
+        companyTickerInput.clearFocus()
         companyNameInput.clearFocus()
     }
 
+    private fun cancel(){
+        navigateMainActivity()
+    }
+
     private fun saveCompany() {
+        if (checkAndSetIsErrorFields()) return
         val companyName = companyNameEdit.text.toString()
-        val companyTicker = tickerEdit.text.toString()
+        val companyTicker = companyTickerEdit.text.toString()
         val company = CompanyEntity(
             companyName = companyName,
             companyTicker = companyTicker,
@@ -96,8 +107,28 @@ class AddStockFragment @Inject constructor(
             investorsPresentation = investorsPresentationRadio.isSelected,
             news = newsRadio.isSelected
         )
-        viewModel.handleSaveStock(company, checklist)
+        viewModel.handleSaveStock(company, checklist, "150")
     }
+
+    private fun checkAndSetIsErrorFields(): Boolean {
+        var bool = false
+        if (companyNameEdit.text.toString() == "") {
+            bool = true
+            setErrorToField(companyNameInput, "Company's name must be filled")
+        }
+        if (companyTickerEdit.text.toString() == "") {
+            bool = true
+            setErrorToField(companyTickerInput, "Company's ticker must be filled")
+        }
+        return bool
+    }
+
+    private fun setErrorToField(inputLayout: TextInputLayout, errorMessage: String = "Error") {
+        inputLayout.error = null
+        inputLayout.isErrorEnabled = false
+        inputLayout.error = errorMessage
+    }
+
 
     private fun showChecklist() {
         if (checklistFlexbox.getChildAt(0).visibility == View.VISIBLE) {
@@ -137,8 +168,9 @@ class AddStockFragment @Inject constructor(
 
     private fun navigateMainActivity() {
         val mainActivityIntent = Intent(context, MainActivity::class.java)
-        mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         context?.startActivity(mainActivityIntent)
+        activity?.finish()
     }
 
     override fun onClick(v: View) {
@@ -146,6 +178,7 @@ class AddStockFragment @Inject constructor(
             R.id.addStockBackground -> onBackgroundClick()
             R.id.checklistLayout -> showChecklist()
             R.id.saveStockButton -> saveCompany()
+            R.id.cancelStockButton -> cancel()
             R.id.tenKRadio
                     or R.id.ceoRadio
                     or R.id.ccRadio

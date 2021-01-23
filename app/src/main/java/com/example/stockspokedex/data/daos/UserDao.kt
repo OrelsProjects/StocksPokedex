@@ -1,7 +1,7 @@
 package com.example.stockspokedex.data.daos
 
 import androidx.room.*
-import com.example.stockspokedex.data.entities.UserEntity
+import com.example.stockspokedex.data.entities.db.UserEntity
 
 @Dao
 interface UserDao {

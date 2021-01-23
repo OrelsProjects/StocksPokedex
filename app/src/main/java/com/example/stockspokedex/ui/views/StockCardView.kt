@@ -6,15 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.example.stockspokedex.R
-import com.example.stockspokedex.data.entities.ChecklistEntity
-import com.example.stockspokedex.data.entities.CompanyEntity
+import com.example.stockspokedex.data.entities.db.ChecklistEntity
+import com.example.stockspokedex.data.entities.db.CompanyEntity
+import com.example.stockspokedex.data.entities.db.StockEntity
 import com.example.stockspokedex.utils.AppUtils
 import kotlinx.android.synthetic.main.layout_stock_card.view.*
 
 class StockCardView(
     activity: Activity,
     company: CompanyEntity,
-    checklistEntity: ChecklistEntity,
+    stock: StockEntity?,
+    checklistEntity: ChecklistEntity?,
     parent: ViewGroup,
     containerHeight: Int,
     containerWidth: Int,
@@ -42,6 +44,24 @@ class StockCardView(
         layoutParams.topMargin = marginTop
         layoutParams.bottomMargin = marginBottom
         view.layoutParams = layoutParams
+        if (stock?.isBuy() == true) {
+            view.isBuyTextView.setTextColor(
+                AppUtils.getColorFromAttributes(
+                    activity,
+                    R.attr.colorGreenVariant
+                )
+            )
+            view.isBuyTextView.text = "BUY"
+        } else {
+            view.isBuyTextView.setTextColor(
+                AppUtils.getColorFromAttributes(
+                    activity,
+                    R.attr.colorRedVariant
+                )
+            )
+            view.isBuyTextView.text = "SELL"
+        }
+        view.priceTextView.text = stock?.currentPrice
     }
 
     companion object {

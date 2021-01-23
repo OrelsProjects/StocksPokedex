@@ -7,6 +7,13 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="iex_base_url_prod">https://cloud.iexapis.com/</string>
+    <string name="iex_base_url_sandbox">https://sandbox.iexapis.com/</string>
+    <string name="iex_api_token">pk_90c746c99d704e4091908a3561fdcd2e</string>
+    <string name="iex_api_token_sandbox">Tpk_6a330ff9dc3645e3b97f2fba6cd5b06a</string>
+
+    <string name="iex_version">stable/</string>
+
     <string name="local_db_name">Stocks Cache</string>
 
     <string name="google_heb">גוגל</string>
@@ -33,4 +40,5 @@
     <string name="add_a_price_target_file">Add a price target file</string>
     <string name="discounted_cash_flow">Discounted Cash Flow</string>
     <string name="save">Save</string>
+    <string name="cancel">cancel</string>
 </resources>

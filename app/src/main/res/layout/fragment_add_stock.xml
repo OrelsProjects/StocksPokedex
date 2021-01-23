@@ -1,161 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/addStockBackground"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveStockButton"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/margin_top_16"
+        android:layout_marginEnd="@dimen/margin_end_16"
+        android:layout_marginBottom="@dimen/margin_bottom_8"
+        android:backgroundTint="?attr/colorAccent"
+        android:text="@string/save"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="@dimen/text_18"
+        app:cornerRadius="@dimen/radius_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dcfLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="?attr/colorRipple" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancelStockButton"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/margin_start_16"
+        android:layout_marginTop="@dimen/margin_top_16"
+        android:layout_marginBottom="@dimen/margin_bottom_8"
+        android:backgroundTint="?attr/backgroundColor"
+        android:text="@string/cancel"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="@dimen/text_18"
+        app:cornerRadius="@dimen/radius_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dcfLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="?attr/colorRipple" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="?attr/backgroundColor">
+        android:layout_marginTop="@dimen/margin_top_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/saveStockButton">
 
-        <TextView
-            android:id="@+id/basicInfoText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_4"
-            android:layout_marginTop="@dimen/margin_top_24"
-            android:text="@string/basic_info"
-            android:textColor="?attr/colorTextSecondaryVariant"
-            android:textSize="@dimen/text_18"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tickerInput"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addStockBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_24"
-            android:layout_marginTop="@dimen/margin_top_8"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:hint="@string/ticker"
-            android:textColorHint="?attr/colorTextSecondary"
-            app:boxBackgroundColor="?attr/backgroundColor"
-            app:hintTextColor="?attr/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/basicInfoText">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tickerEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingStart="0dp"
-                android:textColor="?attr/colorTextPrimary"
-                android:textColorHint="?attr/colorTextSecondary"
-                android:textSize="20sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/companyNameInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_24"
-            android:layout_marginTop="@dimen/margin_top_24"
-            android:layout_marginEnd="@dimen/margin_end_24"
-            android:hint="@string/company_name"
-            android:textColorHint="?attr/colorTextSecondary"
-            app:boxBackgroundColor="?attr/backgroundColor"
-            app:hintTextColor="?attr/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tickerInput">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/companyNameEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:maxLines="1"
-                android:paddingStart="0dp"
-                android:textColor="?attr/colorTextPrimary"
-                android:textColorHint="?attr/colorTextSecondary"
-                android:textSize="20sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <LinearLayout
-            android:id="@+id/checklistLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_start_4"
-            android:layout_marginTop="@dimen/margin_top_24"
-            android:gravity="center|center_vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/companyNameInput"
-            tools:ignore="UseCompoundDrawables">
+            android:layout_height="0dp"
+            android:background="?attr/backgroundColor">
 
             <TextView
-                android:id="@+id/checkListText"
+                android:id="@+id/basicInfoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/checklist"
+                android:layout_marginStart="@dimen/margin_start_4"
+                android:layout_marginTop="@dimen/margin_top_24"
+                android:text="@string/basic_info"
                 android:textColor="?attr/colorTextSecondaryVariant"
-                android:textSize="@dimen/text_18" />
+                android:textSize="@dimen/text_18"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/checklistToggleImage"
-                android:layout_width="@dimen/icon_24"
-                android:layout_height="@dimen/icon_24"
-                android:layout_marginTop="@dimen/margin_top_2"
-                android:contentDescription="@string/show_todo_list"
-                android:rotation="270"
-                android:src="@drawable/ic_chevron_left" />
-        </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/companyTickerInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_24"
+                android:layout_marginTop="@dimen/margin_top_24"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:hint="@string/ticker"
+                android:textColorHint="?attr/colorTextSecondary"
+                app:boxBackgroundColor="?attr/backgroundColor"
+                app:hintTextColor="?attr/colorAccent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/companyNameInput"
+                app:boxStrokeErrorColor="?attr/colorRedVariant"
+                app:errorTextColor="?attr/colorRedVariant"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/error">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/companyTickerEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:paddingStart="0dp"
+                    android:textColor="?attr/colorTextPrimary"
+                    android:textColorHint="?attr/colorTextSecondary"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/companyNameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_24"
+                android:layout_marginTop="@dimen/margin_top_24"
+                android:layout_marginEnd="@dimen/margin_end_24"
+                android:hint="@string/company_name"
+                android:textColorHint="?attr/colorTextSecondary"
+                app:boxBackgroundColor="?attr/backgroundColor"
+                app:boxStrokeErrorColor="?attr/colorRedVariant"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/error"
+                app:hintTextColor="?attr/colorAccent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/basicInfoText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/companyNameEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:paddingStart="0dp"
+                    android:textColor="?attr/colorTextPrimary"
+                    android:textColorHint="?attr/colorTextSecondary"
+                    android:textSize="20sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/checklistLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_start_4"
+                android:layout_marginTop="@dimen/margin_top_24"
+                android:gravity="center|center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/companyTickerInput"
+                tools:ignore="UseCompoundDrawables">
+
+                <TextView
+                    android:id="@+id/checkListText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checklist"
+                    android:textColor="?attr/colorTextSecondaryVariant"
+                    android:textSize="@dimen/text_18" />
+
+                <ImageView
+                    android:id="@+id/checklistToggleImage"
+                    android:layout_width="@dimen/icon_24"
+                    android:layout_height="@dimen/icon_24"
+                    android:layout_marginTop="@dimen/margin_top_2"
+                    android:contentDescription="@string/show_todo_list"
+                    android:rotation="270"
+                    android:src="@drawable/ic_chevron_left" />
+            </LinearLayout>
 
 
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/checklistFlexbox"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/margin_start_24"
-            android:layout_marginTop="@dimen/margin_top_24"
-            android:animateLayoutChanges="true"
-            android:background="?attr/backgroundColor"
-            app:alignItems="flex_start"
-            app:flexDirection="column"
-            app:flexWrap="wrap"
-            app:layout_anchorGravity="start"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checklistLayout">
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/checklistFlexbox"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/margin_start_24"
+                android:layout_marginTop="@dimen/margin_top_24"
+                android:animateLayoutChanges="true"
+                android:background="?attr/backgroundColor"
+                app:alignItems="flex_start"
+                app:flexDirection="column"
+                app:flexWrap="wrap"
+                app:layout_anchorGravity="start"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checklistLayout">
 
-            <include layout="@layout/check_box_ten_k" />
+                <include layout="@layout/check_box_ten_k" />
 
-            <include layout="@layout/check_box_ceo" />
+                <include layout="@layout/check_box_ceo" />
 
-            <include layout="@layout/check_box_cc" />
+                <include layout="@layout/check_box_cc" />
 
-            <include layout="@layout/check_box_ten_q" />
+                <include layout="@layout/check_box_ten_q" />
 
-            <include layout="@layout/check_box_investors_presentation" />
+                <include layout="@layout/check_box_investors_presentation" />
 
-            <include layout="@layout/check_box_news" />
+                <include layout="@layout/check_box_news" />
 
-        </com.google.android.flexbox.FlexboxLayout>
+            </com.google.android.flexbox.FlexboxLayout>
 
-        <include layout="@layout/add_file_bullish_thesis" />
+            <include layout="@layout/add_file_bullish_thesis" />
 
-        <include layout="@layout/add_file_price_target" />
+            <include layout="@layout/add_file_price_target" />
 
-        <include layout="@layout/add_file_dcf" />
+            <include layout="@layout/add_file_dcf" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/saveStockButton"
-            android:layout_width="170dp"
-            android:layout_height="60dp"
-            app:cornerRadius="@dimen/radius_24"
-            android:text="@string/save"
-            android:textSize="@dimen/text_18"
-            android:textColor="?attr/colorTextPrimary"
-            android:layout_marginTop="@dimen/margin_top_24"
-            android:layout_marginBottom="@dimen/margin_bottom_8"
-            android:layout_marginEnd="@dimen/margin_end_16"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dcfLayout"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

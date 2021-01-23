@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
-import android.view.Window
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
@@ -54,10 +53,11 @@ object AppUtils {
         window.navigationBarColor = color
     }
 
-    private fun getColorFromAttributes(context: Context, attr: Int): Int {
+    fun getColorFromAttributes(context: Context, attr: Int): Int {
         val typedValue = TypedValue()
         context.theme.resolveAttribute(attr, typedValue, true)
         return typedValue.data
     }
+
 
 }

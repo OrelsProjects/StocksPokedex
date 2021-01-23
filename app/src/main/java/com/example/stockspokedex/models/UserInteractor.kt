@@ -1,6 +1,6 @@
 package com.example.stockspokedex.models
 
-import com.example.stockspokedex.data.entities.UserEntity
+import com.example.stockspokedex.data.entities.db.UserEntity
 
 interface UserInteractor {
     fun insertUser(user: UserEntity)

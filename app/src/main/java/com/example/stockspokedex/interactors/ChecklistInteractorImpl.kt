@@ -1,8 +1,7 @@
 package com.example.stockspokedex.interactors
 
-import androidx.lifecycle.LiveData
 import com.example.stockspokedex.data.daos.ChecklistDao
-import com.example.stockspokedex.data.entities.ChecklistEntity
+import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.models.ChecklistInteractor
 import javax.inject.Inject
 

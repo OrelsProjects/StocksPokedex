@@ -1,6 +1,6 @@
 package com.example.stockspokedex.models
 
-import com.example.stockspokedex.data.entities.ChecklistEntity
+import com.example.stockspokedex.data.entities.db.ChecklistEntity
 
 interface ChecklistInteractor {
     fun insertChecklist(checklist: ChecklistEntity)

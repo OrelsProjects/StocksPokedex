@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.stockspokedex.data.entities.FileEntity
+import com.example.stockspokedex.data.entities.db.FileEntity
 
 @Dao
 interface FileDao {

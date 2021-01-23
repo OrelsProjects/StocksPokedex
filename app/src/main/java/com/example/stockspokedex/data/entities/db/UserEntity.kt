@@ -1,4 +1,4 @@
-package com.example.stockspokedex.data.entities
+package com.example.stockspokedex.data.entities.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

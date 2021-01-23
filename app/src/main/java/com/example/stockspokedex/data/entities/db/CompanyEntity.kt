@@ -1,4 +1,4 @@
-package com.example.stockspokedex.data.entities
+package com.example.stockspokedex.data.entities.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,10 +10,12 @@ data class CompanyEntity(
     @ColumnInfo var companyTicker: String,
     @ColumnInfo var companyID: String = "",
     @ColumnInfo var checklistID: String = "",
+    @ColumnInfo var stockID: String = "",
     @ColumnInfo var bullishThesisFileID: String = "",
     @ColumnInfo var priceTargetFileID: String = "",
     @ColumnInfo var discountedCashFlowFileID: String = "",
     @ColumnInfo var isActive: Boolean = true,
 ) {
     @Ignore var checklistEntity: ChecklistEntity? = null
+    @Ignore var stockEntity: StockEntity? = null
 }

@@ -1,7 +1,7 @@
 package com.example.stockspokedex.interactors
 
 import com.example.stockspokedex.data.daos.UserDao
-import com.example.stockspokedex.data.entities.UserEntity
+import com.example.stockspokedex.data.entities.db.UserEntity
 import com.example.stockspokedex.models.UserInteractor
 import javax.inject.Inject
 

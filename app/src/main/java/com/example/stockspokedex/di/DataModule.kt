@@ -3,16 +3,15 @@ package com.example.stockspokedex.di
 import android.content.Context
 import androidx.room.Room
 import com.example.stockspokedex.R
-import com.example.stockspokedex.data.daos.ChecklistDao
-import com.example.stockspokedex.data.daos.CompanyDao
-import com.example.stockspokedex.data.daos.FileDao
-import com.example.stockspokedex.data.daos.UserDao
+import com.example.stockspokedex.data.daos.*
 import com.example.stockspokedex.data.database.LocalDatabase
 import com.example.stockspokedex.interactors.ChecklistInteractorImpl
 import com.example.stockspokedex.interactors.CompanyInteractorImpl
+import com.example.stockspokedex.interactors.StockInteractorImpl
 import com.example.stockspokedex.interactors.UserInteractorImpl
 import com.example.stockspokedex.models.ChecklistInteractor
 import com.example.stockspokedex.models.CompanyInteractor
+import com.example.stockspokedex.models.StockInteractor
 import com.example.stockspokedex.models.UserInteractor
 import dagger.Module
 import dagger.Provides
@@ -24,6 +23,8 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object DataModule {
+
+    // region Interactors
 
     @Singleton
     @Provides
@@ -38,6 +39,15 @@ object DataModule {
     @Provides
     fun provideChecklistInteractor(interactorImpl: ChecklistInteractorImpl): ChecklistInteractor =
         interactorImpl
+
+    @Singleton
+    @Provides
+    fun provideStockInteractor(interactorImpl: StockInteractorImpl): StockInteractor =
+        interactorImpl
+
+    // endregion
+
+    //region dbs
 
     @Singleton
     @Provides
@@ -68,5 +78,12 @@ object DataModule {
         LocalDatabase::class.java, context.getString(R.string.local_db_name)
     ).fallbackToDestructiveMigration().allowMainThreadQueries().build().userDao()
 
+    @Singleton
+    @Provides
+    fun provideStockDB(@ApplicationContext context: Context): StockDao = Room.databaseBuilder(
+        context,
+        LocalDatabase::class.java, context.getString(R.string.local_db_name)
+    ).fallbackToDestructiveMigration().allowMainThreadQueries().build().stockDao()
 
+    // endregion
 }

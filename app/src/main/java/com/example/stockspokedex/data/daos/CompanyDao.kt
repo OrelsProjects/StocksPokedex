@@ -2,7 +2,7 @@ package com.example.stockspokedex.data.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.stockspokedex.data.entities.CompanyEntity
+import com.example.stockspokedex.data.entities.db.CompanyEntity
 
 @Dao
 interface CompanyDao {
@@ -50,4 +50,11 @@ interface CompanyDao {
      */
     @Query("select * from CompanyEntity where companyID = :id")
     fun getCompany(id: String): CompanyEntity
+
+    /**
+     * Fetches a company by it's [ticker].
+     * @param ticker is the ticker of the company requested.
+     */
+    @Query("select * from CompanyEntity where companyTicker = :ticker")
+    fun getCompanyByTicker(ticker: String): CompanyEntity?
 }

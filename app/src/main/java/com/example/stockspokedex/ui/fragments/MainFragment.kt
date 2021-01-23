@@ -2,7 +2,7 @@ package com.example.stockspokedex.ui.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.stockspokedex.R
-import com.example.stockspokedex.data.entities.CompanyEntity
+import com.example.stockspokedex.data.entities.db.CompanyEntity
 import com.example.stockspokedex.ui.base.BaseFragment
 import com.example.stockspokedex.ui.viewmodels.MainViewModel
 import com.example.stockspokedex.ui.views.StockCardView
@@ -49,28 +49,27 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
         stocksFlexbox.removeAllViews()
         companies.forEach { company ->
             activity?.let { activity ->
-                company.checklistEntity?.let { checklistEntity ->
-                    var marginStart = 40
-                    var marginEnd = 40
-                    val marginTop = 40
-                    val marginBottom = 40
-                    if (stocksFlexbox.childCount % 2 == 0) { // To keep the margin the same around the object.
-                        marginEnd = 20
-                    } else {
-                        marginStart = 20
-                    }
-                    stocksFlexbox.addView(
-                        StockCardView(
-                            activity,
-                            company,
-                            checklistEntity,
-                            stocksFlexbox,
-                            mainFragmentLayout.height,
-                            mainFragmentLayout.width,
-                            marginStart, marginEnd, marginTop, marginBottom
-                        ).view
-                    )
+                var marginStart = 40
+                var marginEnd = 40
+                val marginTop = 40
+                val marginBottom = 40
+                if (stocksFlexbox.childCount % 2 == 0) { // To keep the margin the same around the object.
+                    marginEnd = 20
+                } else {
+                    marginStart = 20
                 }
+                stocksFlexbox.addView(
+                    StockCardView(
+                        activity,
+                        company,
+                        company.stockEntity,
+                        company.checklistEntity,
+                        stocksFlexbox,
+                        mainFragmentLayout.height,
+                        mainFragmentLayout.width,
+                        marginStart, marginEnd, marginTop, marginBottom
+                    ).view
+                )
             }
         }
     }

@@ -21,7 +21,8 @@
         <item name="colorStatisticsFaded">#200F9AF7</item>
         <item name="colorProgressSeekbar">#805F528F</item>
         <item name="colorControlHighlight">?attr/colorTextSecondary</item>
-        <item  name="android:fontFamily">@font/varelaround</item>
+        <item name="android:fontFamily">@font/varelaround</item>
+        <item name="colorRipple">#8B4E4E4E</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>
@@ -43,6 +44,11 @@
         <item name="hintTextColor">?attr/colorTextSecondary</item>
         <item name="colorControlNormal">?attr/colorTextSecondary</item>
         <item name="colorError">?attr/colorRedVariant</item>
+    </style>
+
+    <style name="error" parent="@android:style/TextAppearance">
+        <item name="android:textColor">?attr/colorRedVariant</item>
+        <item name="android:textSize">@dimen/text_12</item>
     </style>
 
 </resources>
