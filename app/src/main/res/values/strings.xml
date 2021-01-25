@@ -9,6 +9,7 @@
 
     <string name="iex_base_url_prod">https://cloud.iexapis.com/</string>
     <string name="iex_base_url_sandbox">https://sandbox.iexapis.com/</string>
+    <string name="rapid_api_token">d5521624a8msh964b295244bd92bp1b86e0jsn6dee14943944</string>
     <string name="iex_api_token">pk_90c746c99d704e4091908a3561fdcd2e</string>
     <string name="iex_api_token_sandbox">Tpk_6a330ff9dc3645e3b97f2fba6cd5b06a</string>
 

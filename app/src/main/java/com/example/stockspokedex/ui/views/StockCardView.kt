@@ -44,7 +44,7 @@ class StockCardView(
         layoutParams.topMargin = marginTop
         layoutParams.bottomMargin = marginBottom
         view.layoutParams = layoutParams
-        if (stock?.isBuy() == true) {
+        if (stock?.isABuy() == true) {
             view.isBuyTextView.setTextColor(
                 AppUtils.getColorFromAttributes(
                     activity,

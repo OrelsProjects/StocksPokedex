@@ -10,4 +10,19 @@ data class FileEntity(
     @ColumnInfo var downloadLink: String = "",
     @ColumnInfo var isActive: Boolean = true
 ) {
+
+    fun toHashMap(): HashMap<String, Any> =
+        hashMapOf(
+            FIELD_FILE_ID to fileID,
+            FIELD_FILE_NAME to fileName,
+            FIELD_DOWNLOAD_LINK to downloadLink,
+            FIELD_IS_ACTIVE to isActive,
+        )
+
+    companion object {
+        const val FIELD_FILE_ID = "fileID"
+        const val FIELD_FILE_NAME = "fileName"
+        const val FIELD_DOWNLOAD_LINK = "downloadLink"
+        const val FIELD_IS_ACTIVE = "isActive"
+    }
 }

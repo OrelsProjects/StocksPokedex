@@ -6,5 +6,5 @@ interface UserInteractor {
     fun insertUser(user: UserEntity)
     fun deleteUser(user: UserEntity)
     fun updateUser(user: UserEntity)
-    fun getUser(uid: String): UserEntity
+    suspend fun getUserFromFirestoreDB(uid: String): UserEntity?
 }

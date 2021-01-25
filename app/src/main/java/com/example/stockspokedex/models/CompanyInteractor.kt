@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.stockspokedex.data.entities.db.CompanyEntity
 
 interface CompanyInteractor {
-    fun insertCompany(company: CompanyEntity)
+    suspend fun insertCompany(company: CompanyEntity): CompanyEntity?
     fun deleteCompany(company: CompanyEntity)
     fun deleteCompanies(companyIDs: List<String>)
     fun updateCompany(company: CompanyEntity)

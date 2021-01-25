@@ -10,6 +10,7 @@ import com.example.stockspokedex.models.CompanyInteractor
 import com.example.stockspokedex.models.StockInteractor
 import com.example.stockspokedex.ui.base.BaseViewModel
 import com.example.stockspokedex.ui.viewstates.AddStockViewState
+import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -36,15 +37,20 @@ class AddStockViewModel @ViewModelInject constructor(
                         stock = StockEntity()
                         val yahooFinanceStock = YahooFinanceStock.jsonToObject(it.string())
                         stock!!.stockID = Date().time.toString()
-                        stock!!.currentPrice = yahooFinanceStock.prices?.get(0)?.close.toString()
+                        stock!!.currentPrice = yahooFinanceStock?.prices?.get(0)?.close.toString()
                         stock!!.targetPrice = targetPrice
-                        stockInteractor.insertStock(stock!!)
+//                        stockInteractor.insertStock(stock!!)
                     }
                     checklistInteractor.insertChecklist(checklist)
                     company.checklistID = checklist.checklistID
                     stock?.let { company.stockID = it.stockID }
-                    companyInteractor.insertCompany(company)
+                    networkScope.launch {
+                        val companyFromDB = companyInteractor.insertCompany(company)
+                        if (companyFromDB == null) {
+                            // Todo was not inserted
+                        }
                     finishSave()
+                    }
                 }
 
                 override fun onFailure(call: Call, e: IOException) {

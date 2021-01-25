@@ -1,12 +1,18 @@
 package com.example.stockspokedex.interactors
 
 import com.example.stockspokedex.data.daos.ChecklistDao
+import com.example.stockspokedex.data.database.FirestoreUtils
 import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.models.ChecklistInteractor
 import javax.inject.Inject
 
-class ChecklistInteractorImpl @Inject constructor(private val db: ChecklistDao) :
+class ChecklistInteractorImpl @Inject constructor(
+    private val db: ChecklistDao,
+    firestoreUtils: FirestoreUtils
+) :
     ChecklistInteractor {
+
+    private val checklistsCollection = firestoreUtils.getChecklistsCollection()
 
     override fun insertChecklist(checklist: ChecklistEntity) =
         db.insertChecklist(checklist)

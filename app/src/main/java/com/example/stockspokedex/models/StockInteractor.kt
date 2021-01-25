@@ -5,6 +5,6 @@ import okhttp3.Callback
 
 interface StockInteractor {
     fun getYahooFinanceStockData(ticker: String, callback: Callback)
-    fun insertStock(stockEntity: StockEntity)
+    suspend fun insertStock(stockEntity: StockEntity)
     fun getAllStocks(): List<StockEntity>
 }

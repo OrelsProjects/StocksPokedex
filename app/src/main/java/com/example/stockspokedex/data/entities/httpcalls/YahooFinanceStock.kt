@@ -30,7 +30,8 @@ class YahooFinanceStock {
     var eventsData: List<EventsData>? = null
 
     companion object {
-        fun jsonToObject(json: String): YahooFinanceStock {
+        fun jsonToObject(json: String): YahooFinanceStock? {
+            if (json == "Not Found") return null
             val gson = GsonBuilder().create()
             return gson.fromJson(json, YahooFinanceStock::class.java)
         }

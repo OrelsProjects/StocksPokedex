@@ -59,5 +59,13 @@ object AppUtils {
         return typedValue.data
     }
 
+    fun reportCrash(throwable: Throwable) {
+//        FirebaseCrashlytics.getInstance().recordException(throwable)
+    }
+
+    fun reportCrashAndThrow(throwable: Throwable) {
+//        FirebaseCrashlytics.getInstance().recordException(throwable)
+//        throw throwable
+    }
 
 }
