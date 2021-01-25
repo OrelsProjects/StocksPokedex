@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin : 'dagger.hilt.android.plugin'
 
@@ -91,5 +93,15 @@ dependencies {
 
     // gson
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    // Firebase
+    api 'com.google.firebase:firebase-core:18.0.1'
+    api 'com.google.firebase:firebase-storage:19.2.1'
+    api 'com.google.firebase:firebase-auth:20.0.2'
+    api 'com.google.firebase:firebase-database:19.6.0'
+    api 'com.google.firebase:firebase-analytics-ktx:18.0.1'
+    api 'com.google.firebase:firebase-crashlytics:17.3.0'
+    api 'com.google.firebase:firebase-perf:19.1.0'
+    api 'com.google.firebase:firebase-firestore-ktx:22.0.1'
 
 }

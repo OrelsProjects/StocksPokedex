@@ -10,6 +10,7 @@ import com.example.stockspokedex.R
 import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.General
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         setContentView(R.layout.activity_main)
         attachOnClickListeners()
         AppUtils.setNotificationAndNavigationBarsColors(this)

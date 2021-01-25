@@ -13,6 +13,9 @@ import com.example.stockspokedex.models.ChecklistInteractor
 import com.example.stockspokedex.models.CompanyInteractor
 import com.example.stockspokedex.models.StockInteractor
 import com.example.stockspokedex.models.UserInteractor
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,6 +87,18 @@ object DataModule {
         context,
         LocalDatabase::class.java, context.getString(R.string.local_db_name)
     ).fallbackToDestructiveMigration().allowMainThreadQueries().build().stockDao()
+
+    // endregion
+
+    // region firebase
+
+    @Singleton
+    @Provides
+    fun provideFirebaseStorageRef(): StorageReference = FirebaseStorage.getInstance().reference
+
+    @Singleton
+    @Provides
+    fun provideFirebaseRef(): FirebaseFirestore = FirebaseFirestore.getInstance()
 
     // endregion
 }
