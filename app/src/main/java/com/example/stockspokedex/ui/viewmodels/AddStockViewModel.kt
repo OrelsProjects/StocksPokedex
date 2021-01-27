@@ -15,7 +15,6 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
-import java.util.*
 
 class AddStockViewModel @ViewModelInject constructor(
     private val viewState: AddStockViewState,
@@ -30,26 +29,34 @@ class AddStockViewModel @ViewModelInject constructor(
         if (companyInteractor.getCompanyByTicker(company.companyTicker) != null) {
             viewState.isCompanyExistsInDB = true
         } else {
-            stockInteractor.getYahooFinanceStockData(company.companyTicker, object : Callback {
+            stockInteractor.getStockHistoricalData(company.companyTicker, object : Callback {
                 override fun onResponse(call: Call, response: Response) {
                     var stock: StockEntity? = null
                     response.body?.let {
                         stock = StockEntity()
                         val yahooFinanceStock = YahooFinanceStock.jsonToObject(it.string())
-                        stock!!.stockID = Date().time.toString()
-                        stock!!.currentPrice = yahooFinanceStock?.prices?.get(0)?.close.toString()
-                        stock!!.targetPrice = targetPrice
-//                        stockInteractor.insertStock(stock!!)
+                        stock?.currentPrice = yahooFinanceStock?.prices?.get(0)?.close.toString()
+                        stock?.targetPrice = targetPrice
                     }
-                    checklistInteractor.insertChecklist(checklist)
-                    company.checklistID = checklist.checklistID
-                    stock?.let { company.stockID = it.stockID }
                     networkScope.launch {
-                        val companyFromDB = companyInteractor.insertCompany(company)
-                        if (companyFromDB == null) {
+                        var stockInsertResult: StockEntity? = null
+                        if (stock != null) {
+                            stockInsertResult = stockInteractor.insertStock(stock!!)
+                        }
+                        val checklistInsertResult = checklistInteractor.insertChecklist(checklist)
+                        company.checklistID = checklist.checklistID
+                        stock?.let { company.stockID = it.stockID }
+                        val companyInsertResult = companyInteractor.insertCompany(company)
+                        if (companyInsertResult == null) {
                             // Todo was not inserted
                         }
-                    finishSave()
+                        if(stockInsertResult == null){
+                            // Todo was not inserted
+                        }
+                        if(checklistInsertResult == null){
+                            // Todo was not inserted
+                        }
+                        finishSave()
                     }
                 }
 

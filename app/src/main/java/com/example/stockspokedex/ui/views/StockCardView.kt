@@ -10,6 +10,7 @@ import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.data.entities.db.CompanyEntity
 import com.example.stockspokedex.data.entities.db.StockEntity
 import com.example.stockspokedex.utils.AppUtils
+import com.example.stockspokedex.utils.Constants
 import kotlinx.android.synthetic.main.layout_stock_card.view.*
 
 class StockCardView(
@@ -51,7 +52,7 @@ class StockCardView(
                     R.attr.colorGreenVariant
                 )
             )
-            view.isBuyTextView.text = "BUY"
+            view.isBuyTextView.text = Constants.STRING_BUY
         } else {
             view.isBuyTextView.setTextColor(
                 AppUtils.getColorFromAttributes(
@@ -59,13 +60,13 @@ class StockCardView(
                     R.attr.colorRedVariant
                 )
             )
-            view.isBuyTextView.text = "SELL"
+            view.isBuyTextView.text = Constants.STRING_SELL
         }
-        view.priceTextView.text = stock?.currentPrice
+        view.priceTextView.text = AppUtils.getPriceTextDollars(stock?.currentPrice?.toFloat()?.toInt().toString())
     }
 
     companion object {
         const val CARDS_IN_ROW = 2
-        const val CARDS_IN_COLUMN = 2
+        const val CARDS_IN_COLUMN = 4
     }
 }

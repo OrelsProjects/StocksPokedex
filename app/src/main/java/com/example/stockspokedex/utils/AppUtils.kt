@@ -59,6 +59,8 @@ object AppUtils {
         return typedValue.data
     }
 
+    fun getPriceTextDollars(price: String) = "$price$"
+
     fun reportCrash(throwable: Throwable) {
 //        FirebaseCrashlytics.getInstance().recordException(throwable)
     }

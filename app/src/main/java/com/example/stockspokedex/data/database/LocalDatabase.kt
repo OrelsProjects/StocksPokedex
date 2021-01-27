@@ -7,7 +7,7 @@ import com.example.stockspokedex.data.entities.db.*
 
 @Database(
     entities = [ChecklistEntity::class, UserEntity::class, CompanyEntity::class, FileEntity::class, StockEntity::class],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class LocalDatabase : RoomDatabase() {

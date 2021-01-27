@@ -1,11 +1,14 @@
 package com.example.stockspokedex.interactors
 
 import android.content.Context
-import com.example.stockspokedex.R
 import com.example.stockspokedex.data.daos.StockDao
 import com.example.stockspokedex.data.database.FirestoreUtils
 import com.example.stockspokedex.data.entities.db.StockEntity
 import com.example.stockspokedex.models.StockInteractor
+import com.example.stockspokedex.utils.AppUtils
+import com.example.stockspokedex.utils.Constants.API_HOST_RAPID
+import com.example.stockspokedex.utils.Constants.API_TOKEN_RAPID
+import com.example.stockspokedex.utils.HttpRequestUrls
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.tasks.await
 import okhttp3.Call
@@ -21,31 +24,31 @@ class StockInteractorImpl @Inject constructor(
 ) : StockInteractor {
 
     private val stocksCollection = firestoreUtils.getStocksCollection()
+    private val client = OkHttpClient()
 
-    override fun getYahooFinanceStockData(ticker: String, callback: Callback) {
-
-        val client = OkHttpClient()
-        val baseUrlRapidAPI = "https://cloud.iexapis.com/"
-        val stockRapidAPI = "stock/v3/get-historical-data?symbol=${ticker}&region=US\""
-        val baseUrlIEX = "https://cloud-sse.iexapis.com/"
-        val tokenRapid = "apidojo-yahoo-finance-v1.p.rapidapi.com"
-        val stockUrlIEX =
-            baseUrlIEX + "stable/stocksUSNoUTP?token=${context.getString(R.string.iex_api_token)}&symbols=spy,ibm,twtr"
-        val stockURLRapid = baseUrlRapidAPI + stockRapidAPI
+    override fun getStockHistoricalData(ticker: String, callback: Callback) {
         val request = Request.Builder()
-            .url("https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-historical-data?symbol=${ticker}&region=US")
+            .url(HttpRequestUrls.getStockHistoricalDataURL(ticker))
             .get()
-            .addHeader("x-rapidapi-key", "d5521624a8msh964b295244bd92bp1b86e0jsn6dee14943944")
-            .addHeader("x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
+            .addHeader("x-rapidapi-key", API_TOKEN_RAPID)
+            .addHeader("x-rapidapi-host", API_HOST_RAPID)
             .build()
 
         val call: Call = client.newCall(request)
         call.enqueue(callback)
     }
 
-    override suspend fun insertStock(stockEntity: StockEntity) {
-        stocksCollection.document().set(stockEntity.toHashMap()).await()
+    override suspend fun insertStock(stockEntity: StockEntity): StockEntity? {
+        return try{
+        val stockDocument = stocksCollection.document()
+        stockEntity.stockID = stockDocument.id
+        stockDocument.set(stockEntity.toHashMap()).await()
         db.insertStock(stockEntity)
+        stockEntity
+        } catch (e: Exception) {
+            AppUtils.reportCrash(e)
+            null
+        }
     }
 
     override fun getAllStocks(): List<StockEntity> =

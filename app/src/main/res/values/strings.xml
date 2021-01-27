@@ -42,4 +42,8 @@
     <string name="discounted_cash_flow">Discounted Cash Flow</string>
     <string name="save">Save</string>
     <string name="cancel">cancel</string>
+    <string name="buy">BUY</string>
+    <string name="_239">239$</string>
+    <string name="ticker_bynd">BYND</string>
+    <string name="beyond_meat">Beyond Meat</string>
 </resources>

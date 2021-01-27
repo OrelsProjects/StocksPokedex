@@ -13,7 +13,7 @@
         android:id="@+id/companyNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/placeholder"
+        android:text="@string/beyond_meat"
         android:textColor="?attr/colorTextPrimary"
         android:textSize="@dimen/text_16"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         android:id="@+id/companyTickerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/placeholder"
+        android:text="@string/ticker_bynd"
         android:textSize="@dimen/text_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,26 +33,26 @@
 
     <TextView
         android:id="@+id/isBuyTextView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:text="@string/placeholder"
-        android:textAlignment="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buy"
+        android:gravity="center"
+        android:textSize="@dimen/text_22"
+        android:textColor="?attr/colorGreenVariant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/priceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:text="@string/_239"
         android:textSize="@dimen/text_22"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/companyTickerText" />
-
-    <TextView
-        android:id="@+id/priceTextView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="@dimen/margin_bottom_16"
-        android:text="@string/placeholder"
-        android:textAlignment="center"
-        android:textSize="@dimen/text_22"
-        app:layout_constraintBottom_toTopOf="@id/isBuyTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

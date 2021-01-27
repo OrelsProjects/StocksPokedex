@@ -10,7 +10,9 @@ data class StockEntity(
     @ColumnInfo var targetPrice: String = "",
     @ColumnInfo var isActive: Boolean = true
 ) {
-    fun isABuy() = targetPrice <= currentPrice
+    fun isABuy(): Boolean {
+        return targetPrice >= currentPrice
+    }
 
     fun toHashMap(): HashMap<String, Any> =
         hashMapOf(

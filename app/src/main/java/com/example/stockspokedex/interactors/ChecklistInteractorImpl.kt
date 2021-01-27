@@ -4,6 +4,8 @@ import com.example.stockspokedex.data.daos.ChecklistDao
 import com.example.stockspokedex.data.database.FirestoreUtils
 import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.models.ChecklistInteractor
+import com.example.stockspokedex.utils.AppUtils
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class ChecklistInteractorImpl @Inject constructor(
@@ -14,8 +16,18 @@ class ChecklistInteractorImpl @Inject constructor(
 
     private val checklistsCollection = firestoreUtils.getChecklistsCollection()
 
-    override fun insertChecklist(checklist: ChecklistEntity) =
-        db.insertChecklist(checklist)
+    override suspend fun insertChecklist(checklist: ChecklistEntity): ChecklistEntity? {
+        return try {
+            val checklistDocument = checklistsCollection.document()
+            checklist.checklistID = checklistDocument.id
+            checklistDocument.set(checklist.toHashMap()).await()
+            db.insertChecklist(checklist)
+            checklist
+        } catch (e: Exception) {
+            AppUtils.reportCrash(e)
+            null
+        }
+    }
 
 
     override fun deleteChecklist(checklist: ChecklistEntity) {
