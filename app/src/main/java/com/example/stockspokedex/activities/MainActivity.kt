@@ -7,6 +7,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.example.stockspokedex.R
+import com.example.stockspokedex.utils.AppIntents.EXTRA_IS_EDIT_STOCK
+import com.example.stockspokedex.utils.AppIntents.EXTRA_STOCK_INFO_BUNDLE
 import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.General
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,25 +39,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         navHostFragment.findNavController().navigate(R.id.mainFragment)
     }
 
-    private fun showAddStockActivity() {
-        val addStockActivityIntent = Intent(this, AddStockActivity::class.java)
+
+    fun showStockInfoActivity(bundle: Bundle? = null) {
+        val addStockActivityIntent = Intent(this, StockInfoActivity::class.java)
+        var bundleToPass: Bundle? = bundle
+        if (bundleToPass == null) {
+            bundleToPass = Bundle()
+            bundleToPass.putBoolean(EXTRA_IS_EDIT_STOCK, false)
+        }
+        addStockActivityIntent.putExtra(EXTRA_STOCK_INFO_BUNDLE, bundleToPass)
         addStockActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         this.startActivity(addStockActivityIntent)
     }
-//
-//    private fun selectPlaceholderIcon() {
-//        for (i in 0 until bottomMenuBar.menu.size()) {
-//            if (bottomMenuBar.menu.getItem(i).itemId == R.id.placeholder_action) {
-//                bottomMenuBar.menu.getItem(i).isChecked = true
-//                return
-//            }
-//        }
-//    }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.mainFAB -> {
-                showAddStockActivity()
+                showStockInfoActivity()
             }
         }
     }

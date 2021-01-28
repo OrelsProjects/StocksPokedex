@@ -48,23 +48,6 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewState>(), View.OnCli
             R.id.loginButton -> {
                 viewModel.handleLogin()
             }
-//            R.id.testButton -> {
-//                val client = OkHttpClient()
-//
-//                val request = Request.Builder()
-//                    .url("https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v3/get-historical-data?symbol=TSLA&region=US")
-//                    .get()
-//                    .addHeader(
-//                        "x-rapidapi-key",
-//                        "d5521624a8msh964b295244bd92bp1b86e0jsn6dee14943944"
-//                    )
-//                    .addHeader("x-rapidapi-host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
-//                    .build()
-//
-//                val call: Call = client.newCall(request)
-//                call.enqueue(callback)
-//            }
-//        }
         }
     }
 

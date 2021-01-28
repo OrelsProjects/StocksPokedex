@@ -5,11 +5,11 @@ import com.example.stockspokedex.data.entities.db.CompanyEntity
 
 interface CompanyInteractor {
     suspend fun insertCompany(company: CompanyEntity): CompanyEntity?
-    fun deleteCompany(company: CompanyEntity)
-    fun deleteCompanies(companyIDs: List<String>)
-    fun updateCompany(company: CompanyEntity)
-    fun getCompany(companyID: String): CompanyEntity
-    fun getCompanyByTicker(ticker: String): CompanyEntity?
-    fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>>
+    suspend fun deleteCompany(company: CompanyEntity):  CompanyEntity?
+    suspend fun deleteCompanies(companyIDs: List<String>)
+    suspend fun updateCompany(company: CompanyEntity):  CompanyEntity?
+    suspend fun getCompany(companyID: String): CompanyEntity
+    suspend fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>>
     fun getAllCompaniesSync(): List<CompanyEntity>
+    fun getCompanyByTickerFromSync(ticker: String): CompanyEntity?
 }

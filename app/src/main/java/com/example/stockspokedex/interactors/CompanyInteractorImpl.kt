@@ -29,23 +29,35 @@ class CompanyInteractorImpl @Inject constructor(
         }
     }
 
-    override fun deleteCompany(company: CompanyEntity) {
+    override suspend fun deleteCompany(company: CompanyEntity): CompanyEntity? {
         db.deleteCompany(company)
+        company.isActive = false
+        return company
     }
 
-    override fun deleteCompanies(companyIDs: List<String>) {
+    override suspend fun deleteCompanies(companyIDs: List<String>) {
         db.deleteCompanies(companyIDs)
     }
 
-    override fun updateCompany(company: CompanyEntity) {
-        db.updateCompany(company)
+    override suspend fun updateCompany(company: CompanyEntity): CompanyEntity? {
+        return try {
+            // todo compare to local to decide whether to go firestore or not
+            companiesCollection.document(company.companyID).update(company.toHashMap()).await()
+            db.updateCompany(company)
+            company
+        } catch (e: Exception) {
+            null
+        }
     }
 
-    override fun getCompany(companyID: String): CompanyEntity = db.getCompany(companyID)
+    override suspend fun getCompany(companyID: String): CompanyEntity = db.getCompany(companyID)
 
-    override fun getCompanyByTicker(ticker: String): CompanyEntity? = db.getCompanyByTicker(ticker)
+    override suspend fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>> =
+        db.getAllCompaniesAsync()
 
-    override fun getAllCompaniesAsync(): LiveData<List<CompanyEntity>> = db.getAllCompaniesAsync()
+    override fun getCompanyByTickerFromSync(ticker: String): CompanyEntity? =
+        db.getCompanyByTicker(ticker)
 
     override fun getAllCompaniesSync(): List<CompanyEntity> = db.getAllCompaniesSync()
+
 }

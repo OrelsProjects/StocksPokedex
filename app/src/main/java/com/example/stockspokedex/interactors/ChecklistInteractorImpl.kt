@@ -30,19 +30,28 @@ class ChecklistInteractorImpl @Inject constructor(
     }
 
 
-    override fun deleteChecklist(checklist: ChecklistEntity) {
+    override suspend fun deleteChecklist(checklist: ChecklistEntity) {
         db.deleteChecklist(checklist)
     }
 
-    override fun deleteChecklists(checklistIDs: List<String>) {
+    override suspend fun deleteChecklists(checklistIDs: List<String>) {
         db.deleteChecklists(checklistIDs)
     }
 
-    override fun updateChecklist(checklist: ChecklistEntity) {
-        db.updateChecklist(checklist)
+    override suspend fun updateChecklist(checklist: ChecklistEntity): ChecklistEntity? {
+        return try {
+            checklistsCollection.document(checklist.checklistID).update(checklist.toHashMap())
+                .await()
+            db.updateChecklist(checklist)
+            checklist
+        } catch (e: Exception) {
+            AppUtils.reportCrash(e)
+            null
+        }
     }
 
-    override fun getChecklist(checklistID: String): ChecklistEntity = db.getChecklist(checklistID)
+    override suspend fun getChecklist(checklistID: String): ChecklistEntity =
+        db.getChecklist(checklistID)
 
     override fun getAllChecklists(): List<ChecklistEntity> = db.getAllChecklists()
 }

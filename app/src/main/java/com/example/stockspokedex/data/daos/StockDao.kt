@@ -3,6 +3,7 @@ package com.example.stockspokedex.data.daos
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.stockspokedex.data.entities.db.StockEntity
 
 @Dao
@@ -13,4 +14,7 @@ interface StockDao {
 
     @Query("select * from StockEntity")
     fun getAllStocks(): List<StockEntity>
+
+    @Update
+    fun updateStock(stockEntity: StockEntity)
 }

@@ -6,7 +6,8 @@ object General {
         enum class Fragments {
             Login,
             Main,
-            AddStock
+            AddStock,
+            EditStock
         }
 }
 

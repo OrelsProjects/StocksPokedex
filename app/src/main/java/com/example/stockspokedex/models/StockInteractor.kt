@@ -6,5 +6,6 @@ import okhttp3.Callback
 interface StockInteractor {
     fun getStockHistoricalData(ticker: String, callback: Callback)
     suspend fun insertStock(stockEntity: StockEntity): StockEntity?
+    suspend fun updateStock(stockEntity: StockEntity): StockEntity?
     fun getAllStocks(): List<StockEntity>
 }

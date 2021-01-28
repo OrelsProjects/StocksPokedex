@@ -44,7 +44,10 @@ object AppUtils {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun setNotificationAndNavigationBarsColors(activity: Activity, colorAttribute: Int = R.attr.backgroundColor){
+    fun setNotificationAndNavigationBarsColors(
+        activity: Activity,
+        colorAttribute: Int = R.attr.backgroundColor
+    ) {
         val window = activity.window
         val color = getColorFromAttributes(activity, colorAttribute)
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)

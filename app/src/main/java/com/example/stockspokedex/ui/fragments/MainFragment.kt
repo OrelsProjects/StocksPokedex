@@ -1,12 +1,20 @@
 package com.example.stockspokedex.ui.fragments
 
+import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.stockspokedex.R
+import com.example.stockspokedex.activities.MainActivity
+import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.data.entities.db.CompanyEntity
+import com.example.stockspokedex.data.entities.db.StockEntity
 import com.example.stockspokedex.ui.base.BaseFragment
 import com.example.stockspokedex.ui.viewmodels.MainViewModel
 import com.example.stockspokedex.ui.views.StockCardView
 import com.example.stockspokedex.ui.viewstates.MainViewState
+import com.example.stockspokedex.utils.AppIntents.EXTRA_CHECKLIST_TO_EDIT
+import com.example.stockspokedex.utils.AppIntents.EXTRA_COMPANY_TO_EDIT
+import com.example.stockspokedex.utils.AppIntents.EXTRA_IS_EDIT_STOCK
+import com.example.stockspokedex.utils.AppIntents.EXTRA_STOCK_TO_EDIT
 import com.example.stockspokedex.utils.General
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -24,7 +32,7 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
 
     override fun updateUI(state: MainViewState) {
         state.companies.observe(this, {
-            setCompaniesCards(it)
+            setStocksCards(it)
         })
         state.reset()
     }
@@ -45,7 +53,20 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
         General.presentedFragment = General.Fragments.Main
     }
 
-    private fun setCompaniesCards(companies: List<CompanyEntity>) {
+    private fun editStock(
+        company: CompanyEntity?,
+        stock: StockEntity?,
+        checklist: ChecklistEntity?
+    ) {
+        val bundle = Bundle()
+        bundle.putString(EXTRA_COMPANY_TO_EDIT, company?.toJson())
+        bundle.putString(EXTRA_STOCK_TO_EDIT, stock?.toJson())
+        bundle.putString(EXTRA_CHECKLIST_TO_EDIT, checklist?.toJson())
+        bundle.putBoolean(EXTRA_IS_EDIT_STOCK, true)
+        (activity as MainActivity).showStockInfoActivity(bundle)
+    }
+
+    private fun setStocksCards(companies: List<CompanyEntity>) {
         stocksFlexbox.removeAllViews()
         companies.forEach { company ->
             activity?.let { activity ->
@@ -58,18 +79,21 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
                 } else {
                     marginStart = 20
                 }
-                stocksFlexbox.addView(
-                    StockCardView(
-                        activity,
-                        company,
-                        company.stockEntity,
-                        company.checklistEntity,
-                        stocksFlexbox,
-                        mainFragmentLayout.height,
-                        mainFragmentLayout.width,
-                        marginStart, marginEnd, marginTop, marginBottom
-                    ).view
+                val stockCardView = StockCardView(
+                    activity,
+                    company,
+                    company.stockEntity,
+                    company.checklistEntity,
+                    stocksFlexbox,
+                    mainFragmentLayout.height,
+                    mainFragmentLayout.width,
+                    marginStart, marginEnd, marginTop, marginBottom
                 )
+                stockCardView.view.setOnLongClickListener {
+                    editStock(company, company.stockEntity, company.checklistEntity)
+                    return@setOnLongClickListener true
+                }
+                stocksFlexbox.addView(stockCardView.view)
             }
         }
     }

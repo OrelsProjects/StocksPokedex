@@ -9,13 +9,15 @@ import com.example.stockspokedex.R
 import com.example.stockspokedex.activities.MainActivity
 import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.data.entities.db.CompanyEntity
+import com.example.stockspokedex.data.entities.db.StockEntity
 import com.example.stockspokedex.ui.base.BaseFragment
-import com.example.stockspokedex.ui.viewmodels.AddStockViewModel
-import com.example.stockspokedex.ui.viewstates.AddStockViewState
+import com.example.stockspokedex.ui.viewmodels.StockInfoViewModel
+import com.example.stockspokedex.ui.viewstates.StockInfoViewState
+import com.example.stockspokedex.utils.AppIntents
+import com.example.stockspokedex.utils.AppIntents.EXTRA_STOCK_INFO_BUNDLE
 import com.example.stockspokedex.utils.AppUtils.hideKeyboard
 import com.example.stockspokedex.utils.General
 import com.google.android.material.textfield.TextInputLayout
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.add_file_bullish_thesis.*
 import kotlinx.android.synthetic.main.add_file_dcf.*
 import kotlinx.android.synthetic.main.add_file_price_target.*
@@ -25,27 +27,49 @@ import kotlinx.android.synthetic.main.check_box_investors_presentation.*
 import kotlinx.android.synthetic.main.check_box_news.*
 import kotlinx.android.synthetic.main.check_box_ten_k.*
 import kotlinx.android.synthetic.main.check_box_ten_q.*
-import kotlinx.android.synthetic.main.fragment_add_stock.*
+import kotlinx.android.synthetic.main.fragment_stock_info.*
 import java.util.*
 import javax.inject.Inject
 
-class AddStockFragment @Inject constructor(
-) : BaseFragment<AddStockViewModel, AddStockViewState>(),
+class StockInfoFragment @Inject constructor(
+) : BaseFragment<StockInfoViewModel, StockInfoViewState>(),
     View.OnClickListener {
 
-    private lateinit var viewModel: AddStockViewModel
+    private var isSavePressed = false
+
+    private lateinit var viewModel: StockInfoViewModel
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(requireActivity()).get(AddStockViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(StockInfoViewModel::class.java)
     }
 
-    override fun getViewModel(): AddStockViewModel = viewModel
+    // todo if resumed dont reset fields!
 
-    override fun updateUI(state: AddStockViewState) {
+    override fun getViewModel(): StockInfoViewModel = viewModel
+
+    override fun updateUI(state: StockInfoViewState) {
+        state.state.observe(this, {
+            when (it) {
+                StockInfoViewState.State.New -> {
+                    setNewStock()
+                }
+                StockInfoViewState.State.Edit -> {
+                    setEditStock(state.companyToEdit, state.stockToEdit, state.checklistToEdit)
+                }
+                else -> {
+
+                }
+            }
+        })
+        if (state.isEditStockDone) {
+            isSavePressed = false
+            navigateMainActivity()
+        }
         if (state.isStockSaveDone) {
             if (state.isCompanyExistsInDB) {
                 setErrorToField(companyNameInput, "The company already exists in your list.")
             } else {
+                isSavePressed = false
                 navigateMainActivity()
             }
         }
@@ -68,10 +92,30 @@ class AddStockFragment @Inject constructor(
         newsRadio.setOnClickListener(this)
     }
 
-    override fun getLayoutResourceFile(): Int = R.layout.fragment_add_stock
+    override fun getLayoutResourceFile(): Int = R.layout.fragment_stock_info
 
-    override fun onViewCreated() =
+    override fun onViewCreated() {
         setAnimationsToFileLayouts()
+        val bundle = arguments?.getBundle(EXTRA_STOCK_INFO_BUNDLE)
+        val isEdit = bundle?.getBoolean(AppIntents.EXTRA_IS_EDIT_STOCK) ?: false
+        var company: CompanyEntity? = null
+        var stock: StockEntity? = null
+        var checklist: ChecklistEntity? = null
+        if (isEdit) {
+            val companyJson = bundle?.getString(AppIntents.EXTRA_COMPANY_TO_EDIT)
+            val stockJson = bundle?.getString(AppIntents.EXTRA_STOCK_TO_EDIT)
+            val checklistJson = bundle?.getString(AppIntents.EXTRA_CHECKLIST_TO_EDIT)
+            if (companyJson == null || stockJson == null || checklistJson == null) {
+                setNewStock()
+                return
+            }
+            company = CompanyEntity.fromJson(companyJson)
+            stock = StockEntity.fromJson(stockJson)
+            checklist = ChecklistEntity.fromJson(checklistJson)
+        }
+        viewModel.setState(isEdit, company, stock, checklist)
+
+    }
 
 
     private fun onBackgroundClick() {
@@ -85,30 +129,80 @@ class AddStockFragment @Inject constructor(
         companyNameInput.clearFocus()
     }
 
-    private fun cancel(){
+    private fun cancel() {
         navigateMainActivity()
     }
 
-    private fun saveCompany() {
+
+    private fun saveChanges() {
+        if (isSavePressed) return
         if (checkAndSetIsErrorFields()) return
-        val companyName = companyNameEdit.text.toString()
-        val companyTicker = companyTickerEdit.text.toString()
-        val company = CompanyEntity(
-            companyName = companyName,
-            companyTicker = companyTicker,
+        isSavePressed = true
+        val company = getCompanyFromField()
+        val stock = getStockFromField()
+        val checklist = getChecklistFromField()
+        viewModel.handleSaveStock(company, checklist, stock)
+    }
+
+    private fun setEditStock(
+        companyEntity: CompanyEntity?,
+        stockEntity: StockEntity?,
+        checklistEntity: ChecklistEntity?
+    ) {
+        setFields(companyEntity, stockEntity, checklistEntity)
+    }
+
+    private fun setNewStock() {
+        resetFields()
+    }
+
+    private fun resetFields() {
+        companyNameEdit.text?.clear()
+        companyTickerEdit.text?.clear()
+        priceTargetEdit.text?.clear()
+        tenKRadio.isChecked = false
+        ceoRadio.isChecked = false
+        ccRadio.isChecked = false
+        tenQRadio.isChecked = false
+        investorsPresentationRadio.isChecked = false
+        newsRadio.isChecked = false
+    }
+
+    private fun setFields(
+        companyEntity: CompanyEntity?,
+        stockEntity: StockEntity?,
+        checklistEntity: ChecklistEntity?
+    ) {
+        companyNameEdit.setText(companyEntity?.companyName)
+        companyTickerEdit.setText(companyEntity?.companyTicker)
+        priceTargetEdit.setText(stockEntity?.priceTarget)
+        tenKRadio.isChecked = checklistEntity?.tenK ?: false
+        ceoRadio.isChecked = checklistEntity?.ceo ?: false
+        ccRadio.isChecked = checklistEntity?.conferenceCall ?: false
+        tenQRadio.isChecked = checklistEntity?.tenQ ?: false
+        investorsPresentationRadio.isChecked = checklistEntity?.investorsPresentation ?: false
+        newsRadio.isChecked = checklistEntity?.news ?: false
+    }
+
+    private fun getCompanyFromField(): CompanyEntity =
+        CompanyEntity(
+            companyName = companyNameEdit.text.toString(),
+            companyTicker = companyTickerEdit.text.toString(),
             companyID = Date().time.toString()
         )
-        val checklist = ChecklistEntity(
-            checklistID = Date().time.toString(),
-            tenK = tenKRadio.isSelected,
-            ceo = ceoRadio.isSelected,
-            conferenceCall = ccRadio.isSelected,
-            tenQ = tenQRadio.isSelected,
-            investorsPresentation = investorsPresentationRadio.isSelected,
-            news = newsRadio.isSelected
-        )
-        viewModel.handleSaveStock(company, checklist, "150")
-    }
+
+    private fun getStockFromField(): StockEntity = StockEntity(
+        priceTarget = priceTargetEdit.text.toString()
+    )
+
+    private fun getChecklistFromField(): ChecklistEntity = ChecklistEntity(
+        tenK = tenKRadio.isChecked,
+        ceo = ceoRadio.isChecked,
+        conferenceCall = ccRadio.isChecked,
+        tenQ = tenQRadio.isChecked,
+        investorsPresentation = investorsPresentationRadio.isChecked,
+        news = newsRadio.isChecked
+    )
 
     private fun checkAndSetIsErrorFields(): Boolean {
         var bool = false
@@ -123,7 +217,10 @@ class AddStockFragment @Inject constructor(
         return bool
     }
 
-    private fun setErrorToField(inputLayout: TextInputLayout, errorMessage: String = "Error") {
+    private fun setErrorToField(
+        inputLayout: TextInputLayout,
+        errorMessage: String = "Error"
+    ) {
         inputLayout.error = null
         inputLayout.isErrorEnabled = false
         inputLayout.error = errorMessage
@@ -168,7 +265,8 @@ class AddStockFragment @Inject constructor(
 
     private fun navigateMainActivity() {
         val mainActivityIntent = Intent(context, MainActivity::class.java)
-        mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        mainActivityIntent.flags =
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         context?.startActivity(mainActivityIntent)
         activity?.finish()
     }
@@ -177,7 +275,7 @@ class AddStockFragment @Inject constructor(
         when (v.id) {
             R.id.addStockBackground -> onBackgroundClick()
             R.id.checklistLayout -> showChecklist()
-            R.id.saveStockButton -> saveCompany()
+            R.id.saveStockButton -> saveChanges()
             R.id.cancelStockButton -> cancel()
             R.id.tenKRadio
                     or R.id.ceoRadio
