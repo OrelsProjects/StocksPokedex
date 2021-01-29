@@ -214,6 +214,15 @@ class StockInfoFragment @Inject constructor(
             bool = true
             setErrorToField(companyTickerInput, "Company's ticker must be filled")
         }
+        if (priceTargetEdit.text.toString() == "") {
+            if (!bool) { // Meaning this is the only field that is not filled.
+                hideKeyboard()
+                stockInfoScrollView.fullScroll(View.FOCUS_DOWN)
+                priceTargetEdit.requestFocus()
+            }
+            bool = true
+            setErrorToField(priceTargetInput, "A price target must be set")
+        }
         return bool
     }
 
