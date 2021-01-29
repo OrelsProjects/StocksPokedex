@@ -36,6 +36,7 @@
         android:ellipsize="end"
         android:lines="1"
         android:text="@string/ticker_bynd"
+        android:textColor="?colorTextSecondary"
         android:textSize="@dimen/text_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
