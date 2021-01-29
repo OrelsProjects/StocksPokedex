@@ -23,7 +23,7 @@ data class StockEntity(
     @ColumnInfo var isActive: Boolean = true
 ) : BaseEntity() {
     fun isABuy(): Boolean {
-        return priceTarget >= currentPrice
+        return priceTarget.toInt() >= currentPrice.toFloat()
     }
 
     override fun toHashMap(): HashMap<String, Any> =

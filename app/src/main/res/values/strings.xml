@@ -46,4 +46,7 @@
     <string name="_239">239$</string>
     <string name="ticker_bynd">BYND</string>
     <string name="beyond_meat">Beyond Meat</string>
+    <string name="continue_with_google">Continue With Google</string>
+    <string name="stocks_pokedex">Stocks Pokedex</string>
+    <string name="app_icon">app icon</string>
 </resources>

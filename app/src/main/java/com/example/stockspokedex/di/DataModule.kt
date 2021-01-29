@@ -5,14 +5,8 @@ import androidx.room.Room
 import com.example.stockspokedex.R
 import com.example.stockspokedex.data.daos.*
 import com.example.stockspokedex.data.database.LocalDatabase
-import com.example.stockspokedex.interactors.ChecklistInteractorImpl
-import com.example.stockspokedex.interactors.CompanyInteractorImpl
-import com.example.stockspokedex.interactors.StockInteractorImpl
-import com.example.stockspokedex.interactors.UserInteractorImpl
-import com.example.stockspokedex.models.ChecklistInteractor
-import com.example.stockspokedex.models.CompanyInteractor
-import com.example.stockspokedex.models.StockInteractor
-import com.example.stockspokedex.models.UserInteractor
+import com.example.stockspokedex.interactors.*
+import com.example.stockspokedex.models.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -46,6 +40,11 @@ object DataModule {
     @Singleton
     @Provides
     fun provideStockInteractor(interactorImpl: StockInteractorImpl): StockInteractor =
+        interactorImpl
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAuthInteractor(interactorImpl: FirebaseAuthInteractorImpl): FirebaseAuthInteractor =
         interactorImpl
 
     // endregion

@@ -15,4 +15,5 @@
     <attr name="colorTextSecondary" format="color" />
     <attr name="colorTextSecondaryVariant" format="color" />
     <attr name="colorRipple" format="color" />
+    <attr name="googleRed" format="color"/>
 </resources>

@@ -13,6 +13,13 @@ interface CompanyDao {
     fun insertCompany(company: CompanyEntity)
 
     /**
+     * Insert a list of companies to the cache.
+     * @param list is the list of the companies to add.
+     */
+    @Insert
+    fun insertCompanies(list:List<CompanyEntity>)
+
+    /**
      * Deletes a company from the cache.
      */
     @Delete
@@ -57,4 +64,10 @@ interface CompanyDao {
      */
     @Query("select * from CompanyEntity where companyTicker = :ticker")
     fun getCompanyByTicker(ticker: String): CompanyEntity?
+
+    /**
+     * Deletes all the data from the table.
+     */
+    @Query("Delete from CompanyEntity")
+    fun clear()
 }

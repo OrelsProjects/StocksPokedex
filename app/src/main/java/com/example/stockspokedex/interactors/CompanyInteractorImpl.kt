@@ -11,14 +11,13 @@ import javax.inject.Inject
 
 class CompanyInteractorImpl @Inject constructor(
     private val db: CompanyDao,
-    firestoreUtils: FirestoreUtils
+    private val firestoreUtils: FirestoreUtils
 ) : CompanyInteractor {
 
-    private val companiesCollection = firestoreUtils.getCompaniesCollection()
 
-    override suspend fun insertCompany(company: CompanyEntity): CompanyEntity? {
+    override suspend fun insertCompany(uid: String, company: CompanyEntity): CompanyEntity? {
         return try {
-            val companyDocument = companiesCollection.document()
+            val companyDocument = firestoreUtils.getCompaniesCollection(uid).document()
             company.companyID = companyDocument.id
             companyDocument.set(company.toHashMap()).await()
             db.insertCompany(company)
@@ -39,10 +38,11 @@ class CompanyInteractorImpl @Inject constructor(
         db.deleteCompanies(companyIDs)
     }
 
-    override suspend fun updateCompany(company: CompanyEntity): CompanyEntity? {
+    override suspend fun updateCompany(uid: String, company: CompanyEntity): CompanyEntity? {
         return try {
             // todo compare to local to decide whether to go firestore or not
-            companiesCollection.document(company.companyID).update(company.toHashMap()).await()
+            firestoreUtils.getCompaniesCollection(uid).document(company.companyID)
+                .update(company.toHashMap()).await()
             db.updateCompany(company)
             company
         } catch (e: Exception) {
@@ -57,6 +57,21 @@ class CompanyInteractorImpl @Inject constructor(
 
     override fun getCompanyByTickerFromSync(ticker: String): CompanyEntity? =
         db.getCompanyByTicker(ticker)
+
+    override suspend fun getCompaniesFromFirestore(uid: String): List<CompanyEntity> {
+        val res = firestoreUtils.getCompaniesCollection(uid).get().await()
+        val companiesList: ArrayList<CompanyEntity> = ArrayList()
+        res.documents.forEach { document ->
+            document.toObject(CompanyEntity::class.java)
+                ?.let { company -> companiesList.add(company) }
+        }
+        return companiesList
+    }
+
+    override fun insertCompanies(list: List<CompanyEntity>) =
+        db.insertCompanies(list)
+
+    override fun clear() = db.clear()
 
     override fun getAllCompaniesSync(): List<CompanyEntity> = db.getAllCompaniesSync()
 

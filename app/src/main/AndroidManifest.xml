@@ -8,12 +8,12 @@
     <application
         android:name=".activities.StocksPokedexActivity"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_pokedex"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StocksPokedex.NoActionBar">
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.AuthActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.StocksPokedex.NoActionBar">
             <intent-filter>

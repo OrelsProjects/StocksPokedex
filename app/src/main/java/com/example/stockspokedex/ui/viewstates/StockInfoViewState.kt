@@ -21,9 +21,6 @@ class StockInfoViewState : BaseViewState() {
         isStockSaveDone = false
         isCompanyExistsInDB = false
         isEditStockDone = false
-        companyToEdit = null
-        stockToEdit = null
-        checklistToEdit = null
     }
 
     enum class State {

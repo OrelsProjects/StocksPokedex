@@ -22,7 +22,7 @@ class MainViewModel @ViewModelInject constructor(
     fun setCompanies() {
         val companies = companyInteractor.getAllCompaniesSync()
         val checklists = checklistInteractor.getAllChecklists()
-        val stocks = stockInteractor.getAllStocks()
+        val stocks = stockInteractor.getAllStocksFromCache()
         companies.forEach { company ->
             val companyPossibleChecklists =
                 checklists.filter { company.checklistID == it.checklistID }

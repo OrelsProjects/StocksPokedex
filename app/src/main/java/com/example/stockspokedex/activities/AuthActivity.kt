@@ -3,17 +3,17 @@ package com.example.stockspokedex.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.stockspokedex.R
-import com.example.stockspokedex.ui.fragments.LoginFragment
+import com.example.stockspokedex.ui.fragments.AuthFragment
 import com.example.stockspokedex.utils.AppUtils
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginActivity  : AppCompatActivity()  {
+class AuthActivity  : AppCompatActivity()  {
 
     @Inject
-    lateinit var loginFragment: LoginFragment
+    lateinit var loginFragment: AuthFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

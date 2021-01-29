@@ -7,4 +7,6 @@ object Constants {
 
     const val STRING_BUY = "BUY"
     const val STRING_SELL = "SELL"
+
+    const val GOOGLE_SIGN_IN_RESULT_CODE = 3832
 }

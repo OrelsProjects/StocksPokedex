@@ -10,15 +10,17 @@ import javax.inject.Inject
 
 class ChecklistInteractorImpl @Inject constructor(
     private val db: ChecklistDao,
-    firestoreUtils: FirestoreUtils
+    private val firestoreUtils: FirestoreUtils
 ) :
     ChecklistInteractor {
 
-    private val checklistsCollection = firestoreUtils.getChecklistsCollection()
 
-    override suspend fun insertChecklist(checklist: ChecklistEntity): ChecklistEntity? {
+    override suspend fun insertChecklist(
+        uid: String,
+        checklist: ChecklistEntity
+    ): ChecklistEntity? {
         return try {
-            val checklistDocument = checklistsCollection.document()
+            val checklistDocument = firestoreUtils.getChecklistsCollection(uid).document()
             checklist.checklistID = checklistDocument.id
             checklistDocument.set(checklist.toHashMap()).await()
             db.insertChecklist(checklist)
@@ -38,9 +40,13 @@ class ChecklistInteractorImpl @Inject constructor(
         db.deleteChecklists(checklistIDs)
     }
 
-    override suspend fun updateChecklist(checklist: ChecklistEntity): ChecklistEntity? {
+    override suspend fun updateChecklist(
+        uid: String,
+        checklist: ChecklistEntity
+    ): ChecklistEntity? {
         return try {
-            checklistsCollection.document(checklist.checklistID).update(checklist.toHashMap())
+            firestoreUtils.getChecklistsCollection(uid).document(checklist.checklistID)
+                .update(checklist.toHashMap())
                 .await()
             db.updateChecklist(checklist)
             checklist
@@ -53,5 +59,14 @@ class ChecklistInteractorImpl @Inject constructor(
     override suspend fun getChecklist(checklistID: String): ChecklistEntity =
         db.getChecklist(checklistID)
 
+    override suspend fun getChecklistsFromFirestore(uid: String): List<ChecklistEntity> =
+        firestoreUtils.getChecklistsCollection(uid).get().await()
+            .toObjects(ChecklistEntity::class.java)
+
+    override fun insertChecklists(list: List<ChecklistEntity>) =
+        db.insertChecklists(list)
+
     override fun getAllChecklists(): List<ChecklistEntity> = db.getAllChecklists()
+
+    override fun clear() = db.clear()
 }

@@ -12,10 +12,10 @@ import com.google.gson.annotations.SerializedName
 data class CompanyEntity(
     @Expose
     @SerializedName("companyName")
-    @ColumnInfo var companyName: String,
+    @ColumnInfo var companyName: String = "",
     @Expose
     @SerializedName("companyTicker")
-    @ColumnInfo var companyTicker: String,
+    @ColumnInfo var companyTicker: String = "",
     @Expose
     @SerializedName("companyID")
     @ColumnInfo var companyID: String = "",
@@ -38,6 +38,7 @@ data class CompanyEntity(
     @SerializedName("isActive")
     @ColumnInfo var isActive: Boolean = true,
 ) : BaseEntity() {
+
     @Ignore
     var checklistEntity: ChecklistEntity? = null
 

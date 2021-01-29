@@ -12,6 +12,13 @@ interface ChecklistDao {
     fun insertChecklist(checklist: ChecklistEntity)
 
     /**
+     * Insert a list of checklists to the cache.
+     * @param list is the list of the checklists to add.
+     */
+    @Insert
+    fun insertChecklists(list: List<ChecklistEntity>)
+
+    /**
      * Deletes a checklist from the cache.
      */
     @Delete
@@ -42,4 +49,10 @@ interface ChecklistDao {
      */
     @Query("select * from ChecklistEntity where checklistID = :id")
     fun getChecklist(id: String): ChecklistEntity
+
+    /**
+     * Deletes all the data from the table.
+     */
+    @Query("Delete from ChecklistEntity")
+    fun clear()
 }

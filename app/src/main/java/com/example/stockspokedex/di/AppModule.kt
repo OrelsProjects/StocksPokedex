@@ -1,8 +1,8 @@
 package com.example.stockspokedex.di
 
-import com.example.stockspokedex.ui.fragments.LoginFragment
+import com.example.stockspokedex.ui.fragments.AuthFragment
 import com.example.stockspokedex.ui.fragments.StockInfoFragment
-import com.example.stockspokedex.ui.viewstates.LoginViewState
+import com.example.stockspokedex.ui.viewstates.AuthViewState
 import com.example.stockspokedex.ui.viewstates.MainViewState
 import com.example.stockspokedex.ui.viewstates.StockInfoViewState
 import dagger.Module
@@ -24,7 +24,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideLoginViewState() = LoginViewState()
+    fun provideLoginViewState() = AuthViewState()
 
     @Singleton
     @Provides
@@ -32,7 +32,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideLoginFragment() = LoginFragment()
+    fun provideLoginFragment() = AuthFragment()
 
     @Singleton
     @Provides

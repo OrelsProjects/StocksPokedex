@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_bottom_96"
+        android:text="@string/stocks_pokedex"
+        android:textSize="@dimen/text_32"
+        app:layout_constraintBottom_toTopOf="@id/googleLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="@dimen/icon_64"
+        android:layout_height="@dimen/icon_64"
+        android:src="@drawable/ic_pokedex"
+        android:layout_marginBottom="@dimen/margin_bottom_24"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/app_icon" />
+
+    <TextView
+        android:id="@+id/googleLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/google_sign_in"
+        android:elevation="3dp"
+        android:gravity="center"
+        android:paddingStart="@dimen/padding_12"
+        android:paddingEnd="@dimen/padding_12"
+        android:layout_marginStart="@dimen/margin_start_16"
+        android:layout_marginEnd="@dimen/margin_end_16"
+        android:paddingTop="@dimen/padding_8"
+        android:paddingBottom="@dimen/padding_8"
+        android:text="@string/continue_with_google"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_20"
+        app:drawableStartCompat="@drawable/drawable_google_icon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.618"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/testButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/margin_start_48"
+        android:layout_marginEnd="@dimen/margin_end_48"
+        android:backgroundTint="?attr/colorPrimary"
+        android:contentDescription="@string/google_login"
+        android:src="@drawable/ic_home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/googleLogin"
+        android:visibility="gone"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

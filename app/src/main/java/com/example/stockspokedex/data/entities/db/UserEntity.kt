@@ -3,6 +3,7 @@ package com.example.stockspokedex.data.entities.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import com.example.stockspokedex.data.entities.base.BaseEntity
+import com.google.firebase.auth.FirebaseUser
 import com.google.gson.GsonBuilder
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -11,7 +12,7 @@ import com.google.gson.annotations.SerializedName
 data class UserEntity(
     @Expose
     @SerializedName("uid")
-    @ColumnInfo var  uid: String = "",
+    @ColumnInfo var uid: String = "",
     @Expose
     @SerializedName("gender")
     @ColumnInfo var gender: String = "",
@@ -61,5 +62,13 @@ data class UserEntity(
 
         fun fromJson(json: String): UserEntity =
             GsonBuilder().create().fromJson(json, UserEntity::class.java)
+
+        fun firebaseUserToEntity(firebaseUser: FirebaseUser?): UserEntity? {
+            if (firebaseUser == null) return null
+            return UserEntity(
+                uid = firebaseUser.uid,
+                email = firebaseUser.email ?: ""
+            )
+        }
     }
 }

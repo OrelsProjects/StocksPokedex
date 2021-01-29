@@ -3,6 +3,9 @@ package com.example.stockspokedex.data.daos
 import androidx.room.*
 import com.example.stockspokedex.data.entities.db.UserEntity
 
+/**
+ * Contains only the current connected user.
+ */
 @Dao
 interface UserDao {
     /**
@@ -35,4 +38,13 @@ interface UserDao {
      */
     @Query("select * from UserEntity where uid = :id")
     fun getUser(id: String): UserEntity
+
+    /**
+     * Returns the current connected user object.
+     */
+    @Query("Select * from UserEntity")
+    fun getCurrentUser(): UserEntity
+
+    @Query("delete from UserEntity")
+    fun clear()
 }

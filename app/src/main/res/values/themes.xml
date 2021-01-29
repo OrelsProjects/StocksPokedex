@@ -23,6 +23,7 @@
         <item name="colorControlHighlight">?attr/colorTextSecondary</item>
         <item name="android:fontFamily">@font/varelaround</item>
         <item name="colorRipple">#8B4E4E4E</item>
+        <item name="googleRed">#c63d23</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
         <item name="android:windowLightStatusBar">true</item>
     </style>

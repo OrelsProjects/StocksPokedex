@@ -1,6 +1,5 @@
 package com.example.stockspokedex.data.database
 
-import com.example.stockspokedex.utils.UserUtils
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,17 +11,18 @@ class FirestoreUtils @Inject constructor(
 
     fun getUsersCollection(): CollectionReference = firestoreDB.collection("users")
 
-    private fun getUserDocument(): DocumentReference =
-        firestoreDB.collection("users").document(UserUtils.currentUser.uid)
+    fun getUserDocument(uid: String): DocumentReference =
+        firestoreDB.collection("users").document(uid)
 
-    fun getChecklistsCollection(): CollectionReference =
-        getUserDocument().collection("checklists")
+    fun getChecklistsCollection(uid: String): CollectionReference =
+        getUserDocument(uid).collection("checklists")
 
-    fun getCompaniesCollection(): CollectionReference =
-        getUserDocument().collection("companies")
+    fun getCompaniesCollection(uid: String): CollectionReference =
+        getUserDocument(uid).collection("companies")
 
-    fun getStocksCollection(): CollectionReference =
-        getUserDocument().collection("stocks")
+    fun getStocksCollection(uid: String): CollectionReference =
+        getUserDocument(uid).collection("stocks")
 
-    fun getFilesCollection(): CollectionReference = getUserDocument().collection("files")
+    fun getFilesCollection(uid: String): CollectionReference =
+        getUserDocument(uid).collection("files")
 }

@@ -10,6 +10,8 @@ import com.example.stockspokedex.models.CompanyInteractor
 import com.example.stockspokedex.models.StockInteractor
 import com.example.stockspokedex.ui.base.BaseViewModel
 import com.example.stockspokedex.ui.viewstates.StockInfoViewState
+import com.example.stockspokedex.utils.AppUtils
+import com.example.stockspokedex.utils.UserUtils
 import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
@@ -31,6 +33,11 @@ class StockInfoViewModel @ViewModelInject constructor(
         stock: StockEntity
     ) {
         if (viewState.state.value == StockInfoViewState.State.Edit) {
+            company.companyID = viewState.companyToEdit?.companyID ?: ""
+            checklist.checklistID = viewState.checklistToEdit?.checklistID ?: ""
+            stock.stockID = viewState.stockToEdit?.stockID ?: ""
+            company.stockID = stock.stockID
+            company.checklistID = checklist.checklistID
             editStock(company, stock, checklist)
         } else {
             addStock(company, stock, checklist)
@@ -49,11 +56,16 @@ class StockInfoViewModel @ViewModelInject constructor(
                             yahooFinanceStock?.prices?.get(0)?.close.toString()
                     }
                     networkScope.launch {
-                        val stockInsertResult = stockInteractor.insertStock(stock)
-                        val checklistInsertResult = checklistInteractor.insertChecklist(checklist)
+                        val stockInsertResult =
+                            stockInteractor.insertStock(UserUtils.currentUser.uid, stock)
+                        val checklistInsertResult = checklistInteractor.insertChecklist(
+                            UserUtils.currentUser.uid,
+                            checklist
+                        )
                         company.checklistID = checklist.checklistID
                         company.stockID = stock.stockID
-                        val companyInsertResult = companyInteractor.insertCompany(company)
+                        val companyInsertResult =
+                            companyInteractor.insertCompany(UserUtils.currentUser.uid, company)
                         if (companyInsertResult == null) {
                             // Todo was not inserted
                         }
@@ -63,13 +75,13 @@ class StockInfoViewModel @ViewModelInject constructor(
                         if (checklistInsertResult == null) {
                             // Todo was not inserted
                         }
-                        finishSave()
+                        finishAddNew()
                     }
                 }
 
                 override fun onFailure(call: Call, e: IOException) {
-                    // todo failed to get info from rapidapi
-                    finishSave()
+                    AppUtils.reportCrash(Throwable("Failed to fetch from APIRAPID"))
+                    finishAddNew()
                 }
             })
         }
@@ -80,21 +92,38 @@ class StockInfoViewModel @ViewModelInject constructor(
         stock: StockEntity,
         checklist: ChecklistEntity
     ) {
-        networkScope.launch {
-            val companyUpdateResult = companyInteractor.updateCompany(company)
-            val stockUpdateResult = stockInteractor.updateStock(stock)
-            val checklistUpdateResult = checklistInteractor.updateChecklist(checklist)
-            if (companyUpdateResult == null) {
-                // Todo was not updated
+        stockInteractor.getStockHistoricalData(company.companyTicker, object : Callback {
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.let {
+                    val yahooFinanceStock = YahooFinanceStock.jsonToObject(it.string())
+                    stock.currentPrice =
+                        yahooFinanceStock?.prices?.get(0)?.close.toString()
+                }
+                networkScope.launch {
+                    val companyUpdateResult =
+                        companyInteractor.updateCompany(UserUtils.currentUser.uid, company)
+                    val stockUpdateResult =
+                        stockInteractor.updateStock(UserUtils.currentUser.uid, stock)
+                    val checklistUpdateResult =
+                        checklistInteractor.updateChecklist(UserUtils.currentUser.uid, checklist)
+                    if (companyUpdateResult == null) {
+                        // Todo was not updated
+                    }
+                    if (stockUpdateResult == null) {
+                        // Todo was not updated
+                    }
+                    if (checklistUpdateResult == null) {
+                        // Todo was not updated
+                    }
+                    finishEdit()
+                }
             }
-            if (stockUpdateResult == null) {
-                // Todo was not updated
+
+            override fun onFailure(call: Call, e: IOException) {
+                AppUtils.reportCrash(Throwable("Failed to fetch from APIRAPID"))
+                finishEdit()
             }
-            if (checklistUpdateResult == null) {
-                // Todo was not updated
-            }
-            finishEdit()
-        }
+        })
     }
 
     fun setState(
@@ -114,7 +143,7 @@ class StockInfoViewModel @ViewModelInject constructor(
         updateUI()
     }
 
-    private fun finishSave() {
+    private fun finishAddNew() {
         viewState.isStockSaveDone = true
         updateUI()
     }

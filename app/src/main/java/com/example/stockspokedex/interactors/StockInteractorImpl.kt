@@ -16,11 +16,10 @@ import okhttp3.Request
 import javax.inject.Inject
 
 class StockInteractorImpl @Inject constructor(
-    firestoreUtils: FirestoreUtils,
-    private val db: StockDao
+    private val db: StockDao,
+    private val firestoreUtils: FirestoreUtils
 ) : StockInteractor {
 
-    private val stocksCollection = firestoreUtils.getStocksCollection()
     private val client = OkHttpClient()
 
     override fun getStockHistoricalData(ticker: String, callback: Callback) {
@@ -35,9 +34,9 @@ class StockInteractorImpl @Inject constructor(
         call.enqueue(callback)
     }
 
-    override suspend fun insertStock(stockEntity: StockEntity): StockEntity? {
+    override suspend fun insertStock(uid: String, stockEntity: StockEntity): StockEntity? {
         return try {
-            val stockDocument = stocksCollection.document()
+            val stockDocument = firestoreUtils.getStocksCollection(uid).document()
             stockEntity.stockID = stockDocument.id
             stockDocument.set(stockEntity.toHashMap()).await()
             db.insertStock(stockEntity)
@@ -48,9 +47,9 @@ class StockInteractorImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateStock(stockEntity: StockEntity): StockEntity? {
+    override suspend fun updateStock(uid: String, stockEntity: StockEntity): StockEntity? {
         return try {
-            stocksCollection.document(stockEntity.stockID).update(stockEntity.toHashMap()).await()
+            firestoreUtils.getStocksCollection(uid).document(stockEntity.stockID).update(stockEntity.toHashMap()).await()
             db.updateStock(stockEntity)
             stockEntity
         } catch (e: Exception) {
@@ -59,7 +58,14 @@ class StockInteractorImpl @Inject constructor(
         }
     }
 
-    override fun getAllStocks(): List<StockEntity> =
+    override suspend fun getStocksFromFirestore(uid: String): List<StockEntity> =
+        firestoreUtils.getStocksCollection(uid).get().await().toObjects(StockEntity::class.java)
+
+    override fun cacheStocks(list: List<StockEntity>) = db.insertStocks(list)
+
+    override fun getAllStocksFromCache(): List<StockEntity> =
         db.getAllStocks()
+
+    override fun clear() = db.clear()
 
 }
