@@ -93,6 +93,9 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
                     editStock(company, company.stockEntity, company.checklistEntity)
                     return@setOnLongClickListener true
                 }
+                stockCardView.view.setOnClickListener {
+                    editStock(company, company.stockEntity, company.checklistEntity)
+                }
                 stocksFlexbox.addView(stockCardView.view)
             }
         }
