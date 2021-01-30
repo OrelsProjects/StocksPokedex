@@ -86,8 +86,10 @@ class AuthFragment : BaseFragment<AuthViewModel, AuthViewState>(), View.OnClickL
         if (state.isLoginSuccessful) {
             UserUtils.currentUser = state.connectedUser!!
             val mainActivityIntent = Intent(context, MainActivity::class.java)
-            mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            mainActivityIntent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context?.startActivity(mainActivityIntent)
+            activity?.finish()
         }
         state.reset()
     }

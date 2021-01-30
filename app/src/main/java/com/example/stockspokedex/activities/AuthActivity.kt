@@ -13,7 +13,7 @@ import javax.inject.Inject
 class AuthActivity : AppCompatActivity() {
 
     @Inject
-    lateinit var loginFragment: AuthFragment
+    lateinit var authFragment: AuthFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +23,8 @@ class AuthActivity : AppCompatActivity() {
         AppUtils.setNotificationAndNavigationBarsColors(this)
         AppUtils.addFragmentToActivity(
             supportFragmentManager,
-            loginFragment,
-            R.id.contentFrameLogin
+            authFragment,
+            R.id.contentFrameAuth
         )
     }
 }

@@ -62,7 +62,9 @@ class StockCardView(
             )
             view.isBuyTextView.text = Constants.STRING_SELL
         }
-        view.priceTextView.text = AppUtils.getPriceTextDollars(stock?.currentPrice?.toFloat()?.toInt().toString())
+        view.priceTextView.text = AppUtils.getPriceTextDollars(
+            stock?.currentPrice?.toFloat()?.toBigDecimal()?.setScale(2).toString()
+        )
     }
 
     companion object {

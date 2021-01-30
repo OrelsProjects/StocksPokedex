@@ -41,15 +41,12 @@ object AppModule {
 
     // region Fragments
 
-    @Singleton
     @Provides
     fun provideLoginFragment() = AuthFragment()
 
-    @Singleton
     @Provides
     fun provideStockInfoFragment() = StockInfoFragment()
 
-    @Singleton
     @Provides
     fun provideSettingsFragment() = SettingsFragment()
 
