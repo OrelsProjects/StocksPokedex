@@ -28,6 +28,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="splashScreenTheme" parent="Theme.StocksPokedex.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
     <style name="Theme.StocksPokedex.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

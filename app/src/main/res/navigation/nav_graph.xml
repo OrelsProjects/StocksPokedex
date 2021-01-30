@@ -7,8 +7,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.stockspokedex.ui.fragments.MainFragment"
-        android:label="MainFragment">
-    </fragment>
+        android:label="MainFragment"/>
 
 
 </navigation>

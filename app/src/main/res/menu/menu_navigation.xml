@@ -14,9 +14,9 @@
         android:title="" />
 
     <item
-        android:id="@+id/action_folder"
-        android:icon="@drawable/ic_baseline_accessible_forward_24"
-        android:title="פעולה 1"
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/settings"
         app:showAsAction="ifRoom" />
 
 </menu>

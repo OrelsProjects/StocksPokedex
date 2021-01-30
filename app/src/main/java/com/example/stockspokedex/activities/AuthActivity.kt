@@ -10,16 +10,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class AuthActivity  : AppCompatActivity()  {
+class AuthActivity : AppCompatActivity() {
 
     @Inject
     lateinit var loginFragment: AuthFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.splashScreenTheme)
         FirebaseApp.initializeApp(this)
-        setContentView(R.layout.activity_login)
-        AppUtils.addFragmentToActivity(supportFragmentManager, loginFragment, R.id.contentFrameLogin)
+        setContentView(R.layout.activity_auth)
         AppUtils.setNotificationAndNavigationBarsColors(this)
+        AppUtils.addFragmentToActivity(
+            supportFragmentManager,
+            loginFragment,
+            R.id.contentFrameLogin
+        )
     }
 }

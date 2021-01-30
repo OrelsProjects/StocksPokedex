@@ -32,21 +32,10 @@
         android:layout_height="90dp"
         android:clipChildren="false"
         android:clipToPadding="false"
+        android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/mainFAB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/add_stock"
-            android:elevation="10dp"
-            android:src="@drawable/ic_add"
-            app:backgroundTint="?attr/colorAccent"
-            app:fabSize="normal"
-            app:layout_anchor="@id/bottomAppBar" />
 
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -69,7 +58,19 @@
             app:itemIconSize="@dimen/icon_32"
             app:itemTextColor="?attr/colorTextSecondary"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu" />
+            app:menu="@menu/menu_navigation" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/mainFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/add_stock"
+            android:elevation="102dp"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="?attr/colorAccent"
+            app:fabSize="normal"
+            app:layout_anchor="@id/bottomAppBar" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

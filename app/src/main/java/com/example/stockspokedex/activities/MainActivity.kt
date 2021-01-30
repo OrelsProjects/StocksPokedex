@@ -39,6 +39,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         navHostFragment.findNavController().navigate(R.id.mainFragment)
     }
 
+    private fun showSettingsActivity(bundle: Bundle? = null) {
+        val settingsIntent = Intent(this, SettingsActivity::class.java)
+        settingsIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(settingsIntent)
+    }
 
     fun showStockInfoActivity(bundle: Bundle? = null) {
         val addStockActivityIntent = Intent(this, StockInfoActivity::class.java)
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
         }
         addStockActivityIntent.putExtra(EXTRA_STOCK_INFO_BUNDLE, bundleToPass)
         addStockActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        this.startActivity(addStockActivityIntent)
+        startActivity(addStockActivityIntent)
     }
 
     override fun onClick(v: View) {
@@ -63,6 +68,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_home -> showMainFragment()
+//            R.id.action_settings -> showSettingsActivity()
         }
         return true
     }

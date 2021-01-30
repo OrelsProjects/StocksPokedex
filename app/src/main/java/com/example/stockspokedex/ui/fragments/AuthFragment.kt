@@ -45,7 +45,7 @@ class AuthFragment : BaseFragment<AuthViewModel, AuthViewState>(), View.OnClickL
                         AppUtils.reportCrash(e)
                     }
                 }
-            } catch(e:Exception){
+            } catch (e: Exception) {
                 // account.idToken!! failed
                 AppUtils.reportCrash(Throwable("account.idToken most likely failed."))
             }
@@ -54,6 +54,7 @@ class AuthFragment : BaseFragment<AuthViewModel, AuthViewState>(), View.OnClickL
 
     override fun onViewCreated() {
         initGoogleSignInClient()
+        viewModel.handleIsUserLoggedIn()
     }
 
     override fun initViewModel() {
@@ -85,7 +86,7 @@ class AuthFragment : BaseFragment<AuthViewModel, AuthViewState>(), View.OnClickL
         if (state.isLoginSuccessful) {
             UserUtils.currentUser = state.connectedUser!!
             val mainActivityIntent = Intent(context, MainActivity::class.java)
-            mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            mainActivityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             context?.startActivity(mainActivityIntent)
         }
         state.reset()

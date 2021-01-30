@@ -19,6 +19,15 @@ class AuthViewModel @ViewModelInject constructor(
 
     override fun getViewState(): AuthViewState = viewState
 
+    fun handleIsUserLoggedIn() {
+        val user = firebaseAuthInteractor.getLoggedInUser()
+        if (user != null) {
+            viewState.connectedUser = UserEntity.firebaseUserToEntity(user)
+            viewState.isLoginSuccessful = true
+            updateUI()
+        }
+    }
+
     fun handleGoogleLogin(idToken: String) {
         networkScope.launch {
             val firebaseUser = firebaseAuthInteractor.authWithGoogle(idToken) ?: return@launch
@@ -28,7 +37,7 @@ class AuthViewModel @ViewModelInject constructor(
                 viewState.connectedUser = userInteractor.getCurrentUser()
                 viewState.isLoginSuccessful = true
             } else { // New user has logged in.
-                var user =
+                val user =
                     if (!userInteractor.isUserRegistered(firebaseUser.uid)) {
                         val userEntity = UserEntity(
                             uid = firebaseUser.uid,

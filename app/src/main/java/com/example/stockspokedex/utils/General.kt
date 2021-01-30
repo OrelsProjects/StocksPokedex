@@ -7,7 +7,8 @@ object General {
             Login,
             Main,
             AddStock,
-            EditStock
+            EditStock,
+            Settings
         }
 }
 

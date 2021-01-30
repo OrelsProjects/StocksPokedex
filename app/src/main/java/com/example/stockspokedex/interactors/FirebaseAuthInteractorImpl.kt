@@ -8,7 +8,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class FirebaseAuthInteractorImpl @Inject constructor(): FirebaseAuthInteractor {
+class FirebaseAuthInteractorImpl @Inject constructor() : FirebaseAuthInteractor {
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -22,4 +22,10 @@ class FirebaseAuthInteractorImpl @Inject constructor(): FirebaseAuthInteractor {
             null
         }
     }
+
+    override fun signOut() {
+        auth.signOut()
+    }
+
+    override fun getLoggedInUser(): FirebaseUser? = auth.currentUser
 }

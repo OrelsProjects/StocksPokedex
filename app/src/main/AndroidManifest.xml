@@ -8,14 +8,16 @@
     <application
         android:name=".activities.StocksPokedexActivity"
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@drawable/ic_pokedex"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StocksPokedex.NoActionBar">
         <activity
             android:name=".activities.AuthActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.StocksPokedex.NoActionBar">
+            android:label="@string/app_name"
+            android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,6 +26,7 @@
         </activity>
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.StockInfoActivity" />
+        <activity android:name=".activities.SettingsActivity" />
     </application>
 
 </manifest>
