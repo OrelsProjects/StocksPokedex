@@ -5,9 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.subjects.BehaviorSubject
 
 abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState> :
     Fragment() {
+
+    val disposables = CompositeDisposable()
+
+    fun getIsLoading(): BehaviorSubject<Boolean> = isLoading
+    fun setIsLoading(value: Boolean) = isLoading.onNext(value)
 
     protected open fun onBindViewModel() {
         observeState()
@@ -67,4 +74,7 @@ abstract class BaseFragment<V : BaseViewModel<S>, S : BaseViewState> :
         getViewModel().getState().observe(this, { state -> updateUI(state as S) })
     }
 
+    companion object {
+        private val isLoading: BehaviorSubject<Boolean> = BehaviorSubject.createDefault(false)
+    }
 }

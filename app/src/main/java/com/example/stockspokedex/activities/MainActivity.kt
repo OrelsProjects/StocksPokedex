@@ -7,6 +7,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.example.stockspokedex.R
+import com.example.stockspokedex.ui.fragments.LoadingFragment
 import com.example.stockspokedex.utils.AppIntents.EXTRA_IS_EDIT_STOCK
 import com.example.stockspokedex.utils.AppIntents.EXTRA_STOCK_INFO_BUNDLE
 import com.example.stockspokedex.utils.AppUtils
@@ -15,11 +16,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), View.OnClickListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
+
+    @Inject
+    lateinit var loadingFragment: LoadingFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener,
     private fun attachOnClickListeners() {
         mainFAB.setOnClickListener(this)
         bottomMenuBar.setOnNavigationItemSelectedListener(this)
+    }
+
+    fun hideLoadingFragment() {
+        AppUtils.detachFragment(supportFragmentManager, loadingFragment)
+    }
+
+    fun showLoadingFragment() {
+        AppUtils.addFragmentToActivity(
+            supportFragmentManager,
+            loadingFragment,
+            R.id.loadingFrameMain
+        )
     }
 
     private fun showMainFragment() {

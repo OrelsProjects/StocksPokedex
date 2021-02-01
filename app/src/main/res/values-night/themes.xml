@@ -5,6 +5,7 @@
         <item name="colorPrimary">#7156E3</item>
         <item name="colorPrimaryDark">#1B2023</item>
         <item name="backgroundColor">#101518</item>
+        <item name="backgroundColorDimmed">#80101518</item>
         <item name="colorAccent">#7858FE</item>
         <item name="colorAccentDarker">#4624D3</item>
         <item name="colorAccentVariant">#7F6AD5</item>

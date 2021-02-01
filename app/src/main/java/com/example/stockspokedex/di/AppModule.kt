@@ -1,12 +1,10 @@
 package com.example.stockspokedex.di
 
 import com.example.stockspokedex.ui.fragments.AuthFragment
+import com.example.stockspokedex.ui.fragments.LoadingFragment
 import com.example.stockspokedex.ui.fragments.SettingsFragment
 import com.example.stockspokedex.ui.fragments.StockInfoFragment
-import com.example.stockspokedex.ui.viewstates.AuthViewState
-import com.example.stockspokedex.ui.viewstates.MainViewState
-import com.example.stockspokedex.ui.viewstates.SettingsViewState
-import com.example.stockspokedex.ui.viewstates.StockInfoViewState
+import com.example.stockspokedex.ui.viewstates.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,6 +35,10 @@ object AppModule {
     @Provides
     fun provideSettingsViewState() = SettingsViewState()
 
+    @Singleton
+    @Provides
+    fun provideLoadingViewState() = LoadingViewState()
+
     // endregion
 
     // region Fragments
@@ -49,6 +51,9 @@ object AppModule {
 
     @Provides
     fun provideSettingsFragment() = SettingsFragment()
+
+    @Provides
+    fun provideLoadingFragment() = LoadingFragment()
 
     // endregion
 }

@@ -1,6 +1,7 @@
 <resources>
     <attr name="transparent" format="color" />
     <attr name="backgroundColor" format="color" />
+    <attr name="backgroundColorDimmed" format="color" />
     <attr name="colorAccentDarker" format="color" />
     <attr name="colorAccentFaded" format="color" />
     <attr name="colorSeparatingLine" format="color" />
@@ -15,5 +16,5 @@
     <attr name="colorTextSecondary" format="color" />
     <attr name="colorTextSecondaryVariant" format="color" />
     <attr name="colorRipple" format="color" />
-    <attr name="googleRed" format="color"/>
+    <attr name="googleRed" format="color" />
 </resources>

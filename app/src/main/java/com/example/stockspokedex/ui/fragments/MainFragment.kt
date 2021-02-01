@@ -15,8 +15,10 @@ import com.example.stockspokedex.utils.AppIntents.EXTRA_CHECKLIST_TO_EDIT
 import com.example.stockspokedex.utils.AppIntents.EXTRA_COMPANY_TO_EDIT
 import com.example.stockspokedex.utils.AppIntents.EXTRA_IS_EDIT_STOCK
 import com.example.stockspokedex.utils.AppIntents.EXTRA_STOCK_TO_EDIT
+import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.General
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 
 @AndroidEntryPoint
@@ -25,9 +27,25 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
     private lateinit var viewModel: MainViewModel
 
     override fun onViewCreated() {
+        setLoadingSubscribe()
         stocksFlexbox.post {
             viewModel.setCompanies()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.clear()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        disposables.clear()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setLoadingSubscribe()
     }
 
     override fun updateUI(state: MainViewState) {
@@ -51,6 +69,26 @@ class MainFragment : BaseFragment<MainViewModel, MainViewState>() {
 
     override fun setCurrentFragment() {
         General.presentedFragment = General.Fragments.Main
+    }
+
+    private fun setLoadingSubscribe(){
+        disposables.add(
+            getIsLoading()
+                .doOnError {
+//                    viewState.setStatus(
+//                        StatusEntity(Status.Error, Strings.innerAppProblem()),
+//                        "Error in isLoading subscription"
+//                    )
+                    AppUtils.reportCrash(it)
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (it) {
+                        (activity as MainActivity).showLoadingFragment()
+                    } else {
+                        (activity as MainActivity).hideLoadingFragment()
+                    }
+                })
     }
 
     private fun editStock(

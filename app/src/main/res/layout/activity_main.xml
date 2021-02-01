@@ -8,7 +8,7 @@
     tools:context=".activities.MainActivity">
 
     <FrameLayout
-        android:id="@+id/flFragmentContainer"
+        android:id="@+id/contentFrameMain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/navigationCoordinatorLayout"
@@ -25,11 +25,22 @@
             app:navGraph="@navigation/nav_graph" />
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/loadingFrameMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigationCoordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/navigationCoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        android:elevation="2dp"
         android:clipChildren="false"
         android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"

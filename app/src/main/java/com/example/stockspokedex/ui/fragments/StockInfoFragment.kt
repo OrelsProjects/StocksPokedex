@@ -7,6 +7,7 @@ import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import com.example.stockspokedex.R
 import com.example.stockspokedex.activities.MainActivity
+import com.example.stockspokedex.activities.StockInfoActivity
 import com.example.stockspokedex.data.entities.db.ChecklistEntity
 import com.example.stockspokedex.data.entities.db.CompanyEntity
 import com.example.stockspokedex.data.entities.db.StockEntity
@@ -15,9 +16,11 @@ import com.example.stockspokedex.ui.viewmodels.StockInfoViewModel
 import com.example.stockspokedex.ui.viewstates.StockInfoViewState
 import com.example.stockspokedex.utils.AppIntents
 import com.example.stockspokedex.utils.AppIntents.EXTRA_STOCK_INFO_BUNDLE
+import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.AppUtils.hideKeyboard
 import com.example.stockspokedex.utils.General
 import com.google.android.material.textfield.TextInputLayout
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.add_file_bullish_thesis.*
 import kotlinx.android.synthetic.main.add_file_dcf.*
 import kotlinx.android.synthetic.main.add_file_price_target.*
@@ -45,6 +48,21 @@ class StockInfoFragment @Inject constructor(
 
     // todo if resumed dont reset fields!
 
+    override fun onDestroy() {
+        super.onDestroy()
+        disposables.clear()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        disposables.clear()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setLoadingSubscribe()
+    }
+
     override fun getViewModel(): StockInfoViewModel = viewModel
 
     override fun updateUI(state: StockInfoViewState) {
@@ -64,6 +82,7 @@ class StockInfoFragment @Inject constructor(
         if (state.isEditStockDone) {
             isSavePressed = false
             navigateMainActivity()
+            setIsLoading(false)
         }
         if (state.isStockSaveDone) {
             if (state.isCompanyExistsInDB) {
@@ -72,6 +91,7 @@ class StockInfoFragment @Inject constructor(
                 isSavePressed = false
                 navigateMainActivity()
             }
+            setIsLoading(false)
         }
         state.reset()
     }
@@ -118,6 +138,27 @@ class StockInfoFragment @Inject constructor(
     }
 
 
+    private fun setLoadingSubscribe(){
+        disposables.add(
+            getIsLoading()
+                .doOnError {
+//                    viewState.setStatus(
+//                        StatusEntity(Status.Error, Strings.innerAppProblem()),
+//                        "Error in isLoading subscription"
+//                    )
+                    AppUtils.reportCrash(it)
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    if (it) {
+                        (activity as StockInfoActivity).showLoadingFragment()
+                    } else {
+                        (activity as StockInfoActivity).hideLoadingFragment()
+                    }
+                })
+    }
+
+
     private fun onBackgroundClick() {
         clearFocus()
         hideKeyboard()
@@ -138,6 +179,7 @@ class StockInfoFragment @Inject constructor(
         if (isSavePressed) return
         if (checkAndSetIsErrorFields()) return
         isSavePressed = true
+        setIsLoading(true)
         val company = getCompanyFromField()
         val stock = getStockFromField()
         val checklist = getChecklistFromField()

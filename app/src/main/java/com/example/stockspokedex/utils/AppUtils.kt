@@ -22,6 +22,13 @@ object AppUtils {
         transaction.commit()
     }
 
+    fun detachFragment(fragmentManager: FragmentManager, fragment: Fragment): Int? {
+        if (fragmentManager.findFragmentById(fragment.id) == null) return null
+        val transaction = fragmentManager.beginTransaction().detach(fragment)
+        return transaction.commit()
+    }
+
+
     @Suppress("DEPRECATION")
     fun getScreenDimensions(activity: Activity): IntArray {
         val displayMetrics = DisplayMetrics()
