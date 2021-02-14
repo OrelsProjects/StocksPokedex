@@ -12,6 +12,7 @@ import com.example.stockspokedex.data.entities.db.StockEntity
 import com.example.stockspokedex.utils.AppUtils
 import com.example.stockspokedex.utils.Constants
 import kotlinx.android.synthetic.main.layout_stock_card.view.*
+import java.math.BigDecimal
 
 class StockCardView(
     activity: Activity,
@@ -62,8 +63,12 @@ class StockCardView(
             )
             view.isBuyTextView.text = Constants.STRING_SELL
         }
+        if (stock?.currentPrice?.toDoubleOrNull() == null) {
+            stock?.currentPrice = "1"
+        }
         view.priceTextView.text = AppUtils.getPriceTextDollars(
-            stock?.currentPrice?.toFloat()?.toBigDecimal()?.setScale(2).toString()
+            stock?.currentPrice?.toFloat()?.toBigDecimal()?.setScale(2, BigDecimal.ROUND_HALF_DOWN)
+                .toString()
         )
     }
 

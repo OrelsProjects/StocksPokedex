@@ -17,10 +17,13 @@ class StockInfoViewState : BaseViewState() {
     var stockToEdit: StockEntity? = null
     var checklistToEdit: ChecklistEntity? = null
 
+    var isPriceTargetNotInt: Boolean = false
+
     fun reset() {
         isStockSaveDone = false
         isCompanyExistsInDB = false
         isEditStockDone = false
+        isPriceTargetNotInt = false
     }
 
     enum class State {

@@ -32,6 +32,9 @@ class StockInfoViewModel @ViewModelInject constructor(
         checklist: ChecklistEntity,
         stock: StockEntity
     ) {
+        if(stock.priceTarget.toDoubleOrNull() == null){
+            viewState.isPriceTargetNotInt = true
+        }
         if (viewState.state.value == StockInfoViewState.State.Edit) {
             company.companyID = viewState.companyToEdit?.companyID ?: ""
             checklist.checklistID = viewState.checklistToEdit?.checklistID ?: ""

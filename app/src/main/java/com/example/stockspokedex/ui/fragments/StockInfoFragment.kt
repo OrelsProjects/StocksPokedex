@@ -79,6 +79,9 @@ class StockInfoFragment @Inject constructor(
                 }
             }
         })
+        if(state.isPriceTargetNotInt){
+            setErrorToField(priceTargetInput, "The price target has to be a number.")
+        }
         if (state.isEditStockDone) {
             isSavePressed = false
             navigateMainActivity()
